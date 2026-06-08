@@ -1,0 +1,23 @@
+{
+  "name": "driftlock",
+  "version": "0.1.0",
+  "description": "Adaptive SDD harness for long-horizon coding agents.",
+  "author": {
+    "name": "Driftlock"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Driftlock",
+    "shortDescription": "Lock product intent before agents write code.",
+    "longDescription": "Driftlock is an adaptive spec-driven development harness for long-horizon coding agents. It locks user intent into testable specs, executes from gated task splits, and escalates to Debug, CE, or model advisors only when failure signals require it.",
+    "developerName": "Driftlock",
+    "category": "Productivity",
+    "capabilities": [
+      "Spec lock loop",
+      "Gated execution",
+      "Conditional CE",
+      "Amendment advisor fallback"
+    ],
+    "defaultPrompt": "Use Driftlock to lock my product intent into a spec and execute it through gated long-horizon agent workflow."
+  }
+}

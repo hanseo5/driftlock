@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock Spec Lock"
+  short_description: "Lock product intent into implementation-ready specs."
+  default_prompt: "Use Driftlock Spec Lock to turn my product intent into a locked spec."

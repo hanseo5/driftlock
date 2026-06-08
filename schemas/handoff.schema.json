@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Driftlock Handoff Object",
+  "type": "object",
+  "required": [
+    "id",
+    "task_id",
+    "phase",
+    "status",
+    "attempt",
+    "summary",
+    "evidence",
+    "next_action"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "phase": {
+      "enum": ["spec-lock", "task-split", "implement", "build-test", "review", "debug", "ce", "amend", "integration", "handoff"]
+    },
+    "status": { "enum": ["pass", "fail", "blocked", "needs-user", "in-progress"] },
+    "attempt": { "type": "integer", "minimum": 1 },
+    "summary": { "type": "string", "minLength": 1 },
+    "evidence": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "next_action": { "type": "string", "minLength": 1 },
+    "ce_instructions": { "type": "string" },
+    "advisor_confidence": { "enum": ["high", "medium", "low"] }
+  }
+}

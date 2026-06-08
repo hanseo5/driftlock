@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock Amend"
+  short_description: "Resolve spec amendments with model advisors and user approval."
+  default_prompt: "Use Driftlock Amend to handle a spec conflict safely."

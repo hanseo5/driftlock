@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock Execute"
+  short_description: "Run gated long-horizon implementation from a locked spec."
+  default_prompt: "Use Driftlock Execute to implement from a locked spec with gates."

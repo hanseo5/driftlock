@@ -1,0 +1,37 @@
+{
+  "id": "spec-example",
+  "title": "Example Locked Spec",
+  "status": "locked",
+  "intent": "A concise but specific product intent statement with enough context for implementation agents.",
+  "goals": ["Deliver the primary user-visible outcome."],
+  "non_goals": ["Avoid adjacent functionality in this version."],
+  "success_criteria": [
+    {
+      "id": "SC1",
+      "statement": "The user can complete the primary flow end to end.",
+      "testable": true
+    }
+  ],
+  "acceptance_scenarios": [
+    {
+      "id": "AS1",
+      "given": "The user starts from the default state.",
+      "when": "They complete the primary action.",
+      "then": "The expected result is visible and verifiable."
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D1",
+      "question": "What is the primary v1 outcome?",
+      "answer": "The smallest complete version of the primary flow.",
+      "source": "grill-me"
+    }
+  ],
+  "gate_evidence": {
+    "intent_gate": "pass",
+    "grill_gate": "pass",
+    "spec_gate": "pass",
+    "analyze_gate": "pass"
+  }
+}
