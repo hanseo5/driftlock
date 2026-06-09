@@ -1,0 +1,27 @@
+{
+  "run_id": "example-run",
+  "status": "pass",
+  "gates": {
+    "ux_guard": "pass",
+    "build": "pass",
+    "review": "pass",
+    "amendment": "pass",
+    "integration": "pass",
+    "qa": "pass",
+    "proof": "pass"
+  },
+  "artifacts": {
+    "ux_guard": "ux-guard-report.json",
+    "build_evidence": "build-evidence.json",
+    "review_report": "review-report.json",
+    "amendment": "amendment-request.json",
+    "integration": "integration-evidence.json",
+    "quality_report": "quality-report.json",
+    "browser_evidence": "browser-evidence.json",
+    "proof_bundle": "proof-bundle.json",
+    "ce_synthesis": "ce-synthesis.json",
+    "ce_brief": "ce-brief.md",
+    "handoff": "final-handoff.json"
+  },
+  "summary": "All proof bundle gates passed."
+}

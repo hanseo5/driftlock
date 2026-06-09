@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Driftlock Task State",
+  "type": "object",
+  "required": [
+    "run_id",
+    "spec_id",
+    "task_id",
+    "title",
+    "branch",
+    "role",
+    "state",
+    "status",
+    "worktree",
+    "covers",
+    "dependencies",
+    "acceptance_criteria",
+    "attempts",
+    "gates",
+    "next_allowed_events",
+    "history"
+  ],
+  "properties": {
+    "state": {
+      "enum": [
+        "TASK_READY",
+        "IMPLEMENTING",
+        "BUILDING",
+        "REVIEWING",
+        "FIXING",
+        "COMPOUNDING",
+        "AMENDMENT_PENDING",
+        "TASK_DONE",
+        "TASK_BLOCKED"
+      ]
+    },
+    "status": { "enum": ["ready", "in-progress", "done", "blocked"] },
+    "history": { "type": "array" }
+  }
+}

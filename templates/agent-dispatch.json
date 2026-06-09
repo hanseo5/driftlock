@@ -1,0 +1,80 @@
+{
+  "dispatch_id": "example-run-T1-implementer",
+  "created_at": "2026-06-08T00:00:00+00:00",
+  "run_id": "example-run",
+  "spec_id": "spec-example",
+  "status": "ready",
+  "mode": "single-agent-fallback",
+  "route": {
+    "role": "implementer",
+    "skill": "driftlock-implementer",
+    "mutates_code": true,
+    "next_step": "make scoped code changes using TDD and produce implementation-handoff.json",
+    "output_artifact": "implementation-handoff.json",
+    "expected_events": ["implementation-ready", "implementation-blocked"],
+    "current_state": "IMPLEMENTING"
+  },
+  "task": {
+    "task_id": "T1",
+    "title": "Implement the primary flow",
+    "branch": "task/primary-flow",
+    "worktree": ".driftlock/worktrees/T1",
+    "covers": ["SC1", "AS1"],
+    "dependencies": [],
+    "acceptance_criteria": ["SC1 is satisfied by automated or manual verification."],
+    "parallel_group": "foundation",
+    "write_scope": ["Sources/PottsCore"],
+    "merge_risk": "low",
+    "attempts": {
+      "implementation_attempts": 1,
+      "build_attempts": 0,
+      "review_attempts": 0,
+      "fix_attempts": 0,
+      "ce_cycles": 0
+    },
+    "gates": {
+      "implementation": "pending",
+      "build": "pending",
+      "review": "pending",
+      "merge": "pending",
+      "ce": "not-needed",
+      "amendment": "not-needed"
+    },
+    "history": []
+  },
+  "input_artifacts": {
+    "locked_spec": "locked-spec.json",
+    "task_graph": "task-graph.json",
+    "execution_plan": ".driftlock/runs/example-run/execution-plan.json",
+    "task_state": ".driftlock/runs/example-run/tasks/T1/state.json"
+  },
+  "upstream_source": {
+    "repo": "superpowers",
+    "paths": [
+      "third_party/upstream/superpowers/skills/executing-plans",
+      "third_party/upstream/superpowers/skills/subagent-driven-development",
+      "third_party/upstream/superpowers/skills/test-driven-development",
+      "third_party/upstream/superpowers/skills/systematic-debugging",
+      "third_party/upstream/superpowers/skills/using-git-worktrees",
+      "third_party/upstream/superpowers/skills/verification-before-completion"
+    ]
+  },
+  "execution_policy": {
+    "spec_complete_means_sdd_ready": true,
+    "dispatch_after_task_split": true,
+    "tdd_required": true,
+    "builder_required": true,
+    "reviewer_read_only": true,
+    "user_owns_product_intent": true,
+    "ce_forbidden_routes": ["driftlock-handoff", "driftlock-reviewer"],
+    "ce_return_routes": ["driftlock-amend-advisor", "driftlock-fixer", "driftlock-implementer"]
+  },
+  "instructions": [
+    "Work only on the assigned task and preserve the Locked Spec.",
+    "Start from a failing or targeted test when practical; otherwise record why test-first is not applicable and define concrete verification before editing.",
+    "Do not skip builder evidence or read-only review.",
+    "Route product-intent, UX-lock, safety, cost, or scope changes to amendment advisor instead of deciding silently.",
+    "After CE synthesis, return through fixer or implementer before builder and reviewer."
+  ],
+  "expected_events": ["implementation-ready", "implementation-blocked"]
+}

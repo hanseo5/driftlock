@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock Brainstorm"
+  short_description: "Explore product options and tradeoffs."
+  default_prompt: "Use Driftlock Brainstorm for the Driftlock workflow."

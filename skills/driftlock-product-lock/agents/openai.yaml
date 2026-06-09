@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock Product Lock"
+  short_description: "Create the Locked Spec after UX approval."
+  default_prompt: "Use Driftlock Product Lock for the Driftlock workflow."

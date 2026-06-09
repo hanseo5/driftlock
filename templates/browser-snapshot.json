@@ -1,0 +1,18 @@
+{
+  "title": "Driftlock UX Preview",
+  "text": "Product Shape Preview Before Spec Lock First Screen Primary Flow Decision Card Locked Rules",
+  "headings": ["First Screen", "Primary Flow", "Decision Card", "Locked Rules"],
+  "links": 0,
+  "buttons": 0,
+  "buttons_without_name": 0,
+  "inputs": 0,
+  "inputs_without_label": 0,
+  "images": 0,
+  "images_without_alt": 0,
+  "aria_labels": 1,
+  "html_lang": true,
+  "console_errors": [],
+  "artifacts": {
+    "screenshot": ""
+  }
+}

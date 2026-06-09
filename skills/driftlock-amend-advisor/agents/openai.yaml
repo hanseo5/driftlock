@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock Amend Advisor"
+  short_description: "Advise on product-impacting spec amendments."
+  default_prompt: "Use Driftlock Amend Advisor for the Driftlock workflow."

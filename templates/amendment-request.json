@@ -1,0 +1,17 @@
+{
+  "id": "AR1",
+  "class": "clarification",
+  "requires_user_approval": true,
+  "auto_approved": false,
+  "advisor": {
+    "primary": "claude",
+    "primary_status": "limit-or-unavailable",
+    "fallback": "codex-second-pass",
+    "advisor_confidence": "medium"
+  },
+  "options": [
+    "Keep the locked spec and adjust implementation.",
+    "Approve a specific amendment.",
+    "Defer the change to non-goal."
+  ]
+}

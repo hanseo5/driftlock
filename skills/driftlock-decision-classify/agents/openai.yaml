@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock Decision Classify"
+  short_description: "Classify decisions by owner and approval policy."
+  default_prompt: "Use Driftlock Decision Classify for the Driftlock workflow."

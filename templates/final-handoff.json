@@ -1,0 +1,27 @@
+{
+  "id": "final-handoff-example",
+  "status": "pass",
+  "summary": "Final handoff is allowed only after all required gates pass.",
+  "gates": {
+    "ux_guard": "pass",
+    "build": "pass",
+    "review": "pass",
+    "amendment": "pass",
+    "integration": "pass",
+    "qa": "pass",
+    "proof": "pass"
+  },
+  "evidence": [
+    "UX guard passed",
+    "Build evidence passed",
+    "Review report approved",
+    "No open amendment remains",
+    "QA evidence passed",
+    "Proof bundle passed"
+  ],
+  "artifacts": {
+    "proof_bundle": "proof-bundle.json",
+    "quality_report": "quality-report.json"
+  },
+  "next_action": "Deliver result."
+}

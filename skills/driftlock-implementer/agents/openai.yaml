@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock Implementer"
+  short_description: "Make code changes for an assigned task."
+  default_prompt: "Use Driftlock Implementer for the Driftlock workflow."

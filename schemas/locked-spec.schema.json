@@ -7,11 +7,13 @@
     "title",
     "status",
     "intent",
+    "product_shape",
     "goals",
     "non_goals",
     "success_criteria",
     "acceptance_scenarios",
     "decisions",
+    "decision_policy",
     "gate_evidence"
   ],
   "properties": {
@@ -19,6 +21,29 @@
     "title": { "type": "string", "minLength": 1 },
     "status": { "const": "locked" },
     "intent": { "type": "string", "minLength": 20 },
+    "product_shape": {
+      "type": "object",
+      "required": [
+        "primary_user",
+        "first_screen",
+        "core_flow",
+        "ux_principles",
+        "approved_preview",
+        "approval_source"
+      ],
+      "properties": {
+        "primary_user": { "type": "string", "minLength": 1 },
+        "first_screen": { "type": "string", "minLength": 1 },
+        "core_flow": { "type": "string", "minLength": 1 },
+        "ux_principles": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "approved_preview": { "const": true },
+        "approval_source": { "type": "string", "minLength": 1 }
+      }
+    },
     "goals": {
       "type": "array",
       "minItems": 1,
@@ -70,12 +95,44 @@
         }
       }
     },
+    "decision_policy": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["class", "owner", "default_action"],
+        "properties": {
+          "class": {
+            "enum": ["mechanical", "taste", "user-challenge", "safety-destructive"]
+          },
+          "owner": {
+            "enum": ["harness", "user", "advisor"]
+          },
+          "default_action": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
     "gate_evidence": {
       "type": "object",
-      "required": ["intent_gate", "grill_gate", "spec_gate", "analyze_gate"],
+      "required": [
+        "office_hours_gate",
+        "brainstorm_gate",
+        "grill_gate",
+        "intent_brief_gate",
+        "decision_policy_gate",
+        "ux_preview_gate",
+        "ux_approval_gate",
+        "spec_gate",
+        "analyze_gate"
+      ],
       "properties": {
-        "intent_gate": { "const": "pass" },
+        "office_hours_gate": { "const": "pass" },
+        "brainstorm_gate": { "const": "pass" },
         "grill_gate": { "const": "pass" },
+        "intent_brief_gate": { "const": "pass" },
+        "decision_policy_gate": { "const": "pass" },
+        "ux_preview_gate": { "const": "pass" },
+        "ux_approval_gate": { "const": "pass" },
         "spec_gate": { "const": "pass" },
         "analyze_gate": { "const": "pass" }
       }

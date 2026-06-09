@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock Builder"
+  short_description: "Run build, lint, tests, and runtime checks."
+  default_prompt: "Use Driftlock Builder for the Driftlock workflow."

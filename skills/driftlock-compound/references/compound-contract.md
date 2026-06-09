@@ -1,37 +1,66 @@
-# Compound Engineering Contract
+# Driftlock Compound Contract
 
-## Activation Thresholds
+## Purpose
 
-- Build/test failures reach the configured debug threshold.
-- Review rejects repeat on the same task.
-- Review notes identify architecture, coupling, data model, API contract, or UX flow problems.
-- Similar defects appear in multiple branches.
-- Spec conflict appears during implementation.
+Create root-cause learning and a fix brief without skipping execution gates.
 
-## CE Output
+## Upstream Contracts
 
-A CE pass must produce:
+- Compound Engineering: `third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-compound`
+- Compound Engineering: `third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-compound-refresh`
+- Compound Engineering: `third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-debug`
+- Compound Engineering: `third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-compound/references/schema.yaml`
+- gstack: `third_party/upstream/gstack/learn`
+- gstack: `third_party/upstream/gstack/context-save`
+- gstack: `third_party/upstream/gstack/context-restore`
 
-- Failure summary
-- Root cause hypothesis
-- Evidence list
-- Fix brief for implementer/fixer
-- Prevention note for future tasks
-- Escalation decision: execution, amendment, blocked, or user decision
+Compound mode is a learning and route-repair engine. It documents the repeated
+failure pattern, extracts the fix hypothesis, and returns execution to the
+mutation owner. It does not become a shortcut around builder or reviewer.
 
-## Return Path
+## Required Input
 
-CE returns to implementer/fixer. The path is:
+- failing build evidence, rejected review, or repeated fixer loop
+- current locked spec and task graph
+- run history from `.driftlock/runs/<run-id>/state.json`
+- prior learning notes if available
 
-`CE -> Fix Brief -> Implementer/Fixer -> Build/Test -> Review -> Gate`
+## Required Output
 
-CE does not skip build/test or review.
+Produce `ce-synthesis.json` and `ce-brief.md` with enough evidence for the next Driftlock skill to continue without re-interrogating product intent.
 
-## Learning Notes
+The adapter command is:
 
-Use `templates/learning-note.md`. Keep notes concrete:
+```powershell
+python scripts/driftlock.py ce-synthesize --run-dir .driftlock/runs/<run-id> --out .driftlock/runs/<run-id>/ce-synthesis.json --brief-out .driftlock/runs/<run-id>/ce-brief.md
+```
 
-- What failed
-- Why it failed
-- What changed
-- What gate or checklist should catch it next time
+The synthesis JSON must include:
+
+- triggering failure
+- failure clusters
+- root-cause hypothesis
+- what did not work
+- next fix strategy
+- verification plan
+- learning note status and prevention rule
+- whether product intent might be affected
+- return route: `driftlock-fixer`, `driftlock-implementer`, or
+  `driftlock-amend-advisor`
+- forbidden routes: `driftlock-reviewer`, `driftlock-handoff`
+
+The Markdown brief is a human-readable rendering of `ce-synthesis.json`.
+
+## Gate Rules
+
+- CE is conditional, not always on.
+- CE does not edit code directly.
+- CE must return through fixer/implementer and builder.
+- CE must not hand off directly.
+- CE must not route directly to reviewer.
+- CE must write or update learning artifacts when a repeated failure pattern is
+  confirmed.
+
+## Next Route
+
+Route only to the next valid Driftlock skill or to `driftlock-amend-advisor` when product intent, UX lock, or spec meaning would change.

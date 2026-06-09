@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Driftlock Quality Report",
+  "type": "object",
+  "required": ["run_id", "spec_id", "status", "upstream_source", "checks", "findings", "metrics", "next_route", "artifacts"],
+  "properties": {
+    "run_id": { "type": "string", "minLength": 1 },
+    "spec_id": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["pass", "fail"] },
+    "upstream_source": {
+      "type": "object",
+      "required": ["repo", "adapter", "paths"],
+      "properties": {
+        "repo": { "enum": ["compound-engineering-plugin", "gstack"] },
+        "adapter": { "type": "string", "minLength": 1 },
+        "paths": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "checks": {
+      "type": "object",
+      "required": [
+        "execution_completion",
+        "build_verification",
+        "review_integrity",
+        "ux_alignment",
+        "acceptance_coverage",
+        "regression_smoke",
+        "integration_readiness",
+        "accessibility_baseline",
+        "proof_readiness"
+      ],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status", "summary", "evidence"],
+        "properties": {
+          "status": { "enum": ["pass", "fail", "warning", "not_applicable"] },
+          "summary": { "type": "string", "minLength": 1 },
+          "evidence": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "check", "severity", "summary", "recommendation", "source", "owner"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "check": {
+            "enum": [
+              "execution_completion",
+              "build_verification",
+              "review_integrity",
+              "ux_alignment",
+              "acceptance_coverage",
+              "regression_smoke",
+              "integration_readiness",
+              "accessibility_baseline",
+              "proof_readiness"
+            ]
+          },
+          "severity": { "enum": ["critical", "high", "medium", "low"] },
+          "summary": { "type": "string", "minLength": 1 },
+          "recommendation": { "type": "string", "minLength": 1 },
+          "source": { "type": "string", "minLength": 1 },
+          "owner": { "enum": ["fixer", "compound", "amend-advisor", "handoff", "human"] }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "total_findings",
+        "critical_findings",
+        "high_findings",
+        "medium_findings",
+        "low_findings",
+        "check_pass_count",
+        "check_fail_count",
+        "check_warning_count",
+        "check_not_applicable_count"
+      ],
+      "properties": {
+        "total_findings": { "type": "integer", "minimum": 0 },
+        "critical_findings": { "type": "integer", "minimum": 0 },
+        "high_findings": { "type": "integer", "minimum": 0 },
+        "medium_findings": { "type": "integer", "minimum": 0 },
+        "low_findings": { "type": "integer", "minimum": 0 },
+        "check_pass_count": { "type": "integer", "minimum": 0 },
+        "check_fail_count": { "type": "integer", "minimum": 0 },
+        "check_warning_count": { "type": "integer", "minimum": 0 },
+        "check_not_applicable_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "next_route": { "type": "string", "minLength": 1 },
+    "artifacts": {
+      "type": "object",
+      "required": ["locked_spec", "execution_plan", "build_evidence", "review_report", "browser_evidence"],
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}

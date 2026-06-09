@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock UX Approval"
+  short_description: "Capture approval of the shown product shape."
+  default_prompt: "Use Driftlock UX Approval for the Driftlock workflow."

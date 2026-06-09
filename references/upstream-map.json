@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "strategy": "completeness-first",
+  "policy": {
+    "expose_upstream_skills_directly": false,
+    "adapter_required": true,
+    "user_intent_owner": "user",
+    "final_handoff_requires_proof_bundle": true
+  },
+  "repositories": [
+    {
+      "id": "spec-kit",
+      "name": "GitHub Spec Kit",
+      "url": "https://github.com/github/spec-kit.git",
+      "commit": "7106858c4e636098815fffa23f6c6b99eb0e156b",
+      "license": "MIT",
+      "notice": "Copyright GitHub, Inc.",
+      "vendored_root": "third_party/upstream/spec-kit",
+      "imported_roots": [
+        "third_party/upstream/spec-kit/templates",
+        "third_party/upstream/spec-kit/scripts/powershell",
+        "third_party/upstream/spec-kit/scripts/bash"
+      ],
+      "driftlock_layers": ["spec-engine"],
+      "target_skills": [
+        "driftlock-product-lock",
+        "driftlock-spec-gate",
+        "driftlock-task-split"
+      ],
+      "contract_summary": "Use clarify/analyze/specify/plan/tasks templates and setup scripts as the specification discipline behind Locked Spec and task graph creation."
+    },
+    {
+      "id": "superpowers",
+      "name": "Superpowers",
+      "url": "https://github.com/obra/superpowers.git",
+      "commit": "6fd4507659784c351abbd2bc264c7162cfd386dc",
+      "license": "MIT",
+      "notice": "Copyright (c) 2025 Jesse Vincent",
+      "vendored_root": "third_party/upstream/superpowers",
+      "imported_roots": [
+        "third_party/upstream/superpowers/skills/brainstorming",
+        "third_party/upstream/superpowers/skills/writing-plans",
+        "third_party/upstream/superpowers/skills/subagent-driven-development",
+        "third_party/upstream/superpowers/skills/test-driven-development",
+        "third_party/upstream/superpowers/skills/systematic-debugging",
+        "third_party/upstream/superpowers/skills/verification-before-completion",
+        "third_party/upstream/superpowers/skills/using-git-worktrees",
+        "third_party/upstream/superpowers/skills/receiving-code-review",
+        "third_party/upstream/superpowers/skills/requesting-code-review",
+        "third_party/upstream/superpowers/skills/finishing-a-development-branch",
+        "third_party/upstream/superpowers/skills/executing-plans"
+      ],
+      "driftlock_layers": ["office-hours-ui", "execution-engine", "delivery-engine"],
+      "target_skills": [
+        "driftlock-office-hours",
+        "driftlock-brainstorm",
+        "driftlock-grill",
+        "driftlock-implementer",
+        "driftlock-builder",
+        "driftlock-reviewer",
+        "driftlock-fixer",
+        "driftlock-handoff"
+      ],
+      "contract_summary": "Use design-before-implementation gates, one-question clarification, fresh subagent execution, worktree isolation, TDD, debugging, verification, and branch finishing patterns."
+    },
+    {
+      "id": "compound-engineering-plugin",
+      "name": "Compound Engineering Plugin",
+      "url": "https://github.com/EveryInc/compound-engineering-plugin.git",
+      "commit": "b6250490bec4c0488d68ad66d72bd99f6edb95fd",
+      "license": "MIT",
+      "notice": "Copyright (c) 2025 Every",
+      "vendored_root": "third_party/upstream/compound-engineering-plugin",
+      "imported_roots": [
+        "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-code-review",
+        "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-debug",
+        "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-proof",
+        "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-test-browser",
+        "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-worktree",
+        "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-compound",
+        "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-compound-refresh"
+      ],
+      "driftlock_layers": ["quality-engine", "compound-memory"],
+      "target_skills": [
+        "driftlock-builder",
+        "driftlock-reviewer",
+        "driftlock-fixer",
+        "driftlock-compound",
+        "driftlock-handoff"
+      ],
+      "contract_summary": "Use multi-persona review, JSON finding schemas, action routing, debug/proof/browser-test workflows, worktree assistance, and structured learning documents."
+    },
+    {
+      "id": "gstack",
+      "name": "gstack",
+      "url": "https://github.com/garrytan/gstack.git",
+      "commit": "d8c91c6267517c639bd338197368ffd2c2b60be2",
+      "license": "MIT",
+      "notice": "Copyright (c) 2026 Garry Tan",
+      "vendored_root": "third_party/upstream/gstack",
+      "imported_roots": [
+        "third_party/upstream/gstack/office-hours",
+        "third_party/upstream/gstack/plan-ceo-review",
+        "third_party/upstream/gstack/plan-eng-review",
+        "third_party/upstream/gstack/plan-design-review",
+        "third_party/upstream/gstack/design-html",
+        "third_party/upstream/gstack/design-review",
+        "third_party/upstream/gstack/qa",
+        "third_party/upstream/gstack/qa-only",
+        "third_party/upstream/gstack/ship",
+        "third_party/upstream/gstack/guard",
+        "third_party/upstream/gstack/learn",
+        "third_party/upstream/gstack/context-save",
+        "third_party/upstream/gstack/context-restore",
+        "third_party/upstream/gstack/freeze",
+        "third_party/upstream/gstack/health"
+      ],
+      "driftlock_layers": ["office-hours-ui", "quality-engine", "compound-memory", "delivery-engine"],
+      "target_skills": [
+        "driftlock-office-hours",
+        "driftlock-decision-card",
+        "driftlock-design-system-lite",
+        "driftlock-ux-preview",
+        "driftlock-ux-approval",
+        "driftlock-ux-guard",
+        "driftlock-builder",
+        "driftlock-reviewer",
+        "driftlock-handoff"
+      ],
+      "contract_summary": "Use office-hours product judgment, CEO/engineering/design plan review, HTML design preview, live design review, QA, ship, guard, learn, and context persistence concepts."
+    }
+  ]
+}

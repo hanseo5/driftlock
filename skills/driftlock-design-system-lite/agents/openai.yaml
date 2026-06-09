@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock Design System Lite"
+  short_description: "Define minimal UI/UX rules before preview."
+  default_prompt: "Use Driftlock Design System Lite for the Driftlock workflow."

@@ -1,0 +1,85 @@
+{
+  "run_id": "example-run",
+  "spec_id": "spec-example",
+  "status": "pass",
+  "upstream_source": {
+    "repo": "gstack",
+    "adapter": "driftlock-quality-gate",
+    "paths": [
+      "third_party/upstream/gstack/qa",
+      "third_party/upstream/gstack/qa-only",
+      "third_party/upstream/gstack/ship",
+      "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-proof",
+      "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-browser-test"
+    ]
+  },
+  "checks": {
+    "execution_completion": {
+      "status": "pass",
+      "summary": "All task states are complete.",
+      "evidence": ["done=1 total=1 blocked=0"]
+    },
+    "build_verification": {
+      "status": "pass",
+      "summary": "Build and command evidence passed.",
+      "evidence": ["npm test"]
+    },
+    "review_integrity": {
+      "status": "pass",
+      "summary": "Review integrity passed.",
+      "evidence": []
+    },
+    "ux_alignment": {
+      "status": "pass",
+      "summary": "UX approval and lock evidence are present.",
+      "evidence": ["approved_preview=True", "ux-lock.md present", "browser_title=Driftlock UX Preview"]
+    },
+    "acceptance_coverage": {
+      "status": "pass",
+      "summary": "Execution tasks cover all success criteria and scenarios.",
+      "evidence": ["SC1", "AS1"]
+    },
+    "regression_smoke": {
+      "status": "pass",
+      "summary": "Regression smoke command evidence is present.",
+      "evidence": ["npm test", "browser-evidence=ux-preview.html"]
+    },
+    "integration_readiness": {
+      "status": "pass",
+      "summary": "Integration evidence is present.",
+      "evidence": ["integration gate passed"]
+    },
+    "accessibility_baseline": {
+      "status": "pass",
+      "summary": "Accessibility baseline evidence is present.",
+      "evidence": ["keyboard and label smoke completed"]
+    },
+    "proof_readiness": {
+      "status": "pass",
+      "summary": "Proof bundle prerequisite gates are ready.",
+      "evidence": ["ux_guard=pass", "build=pass", "review=pass", "amendment=pass", "integration=pass"]
+    }
+  },
+  "findings": [],
+  "metrics": {
+    "total_findings": 0,
+    "critical_findings": 0,
+    "high_findings": 0,
+    "medium_findings": 0,
+    "low_findings": 0,
+    "check_pass_count": 9,
+    "check_fail_count": 0,
+    "check_warning_count": 0,
+    "check_not_applicable_count": 0
+  },
+  "next_route": "driftlock-handoff",
+  "artifacts": {
+    "locked_spec": "locked-spec.json",
+    "execution_plan": "execution-plan.json",
+    "build_evidence": "build-evidence.json",
+    "review_report": "review-report.json",
+    "ux_lock": "ux-lock.md",
+    "browser_evidence": "browser-evidence.json",
+    "proof_bundle": "proof-bundle.json"
+  }
+}

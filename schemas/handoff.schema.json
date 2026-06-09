@@ -1,32 +1,46 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Driftlock Handoff Object",
+  "title": "Driftlock Final Handoff Object",
   "type": "object",
   "required": [
     "id",
-    "task_id",
-    "phase",
     "status",
-    "attempt",
     "summary",
+    "gates",
     "evidence",
+    "artifacts",
     "next_action"
   ],
   "properties": {
     "id": { "type": "string", "minLength": 1 },
-    "task_id": { "type": "string", "minLength": 1 },
-    "phase": {
-      "enum": ["spec-lock", "task-split", "implement", "build-test", "review", "debug", "ce", "amend", "integration", "handoff"]
-    },
-    "status": { "enum": ["pass", "fail", "blocked", "needs-user", "in-progress"] },
-    "attempt": { "type": "integer", "minimum": 1 },
+    "status": { "const": "pass" },
     "summary": { "type": "string", "minLength": 1 },
+    "gates": {
+      "type": "object",
+      "required": ["ux_guard", "build", "review", "amendment", "integration", "qa", "proof"],
+      "properties": {
+        "ux_guard": { "const": "pass" },
+        "build": { "const": "pass" },
+        "review": { "const": "pass" },
+        "amendment": { "const": "pass" },
+        "integration": { "const": "pass" },
+        "qa": { "const": "pass" },
+        "proof": { "const": "pass" }
+      }
+    },
     "evidence": {
       "type": "array",
+      "minItems": 1,
       "items": { "type": "string" }
     },
-    "next_action": { "type": "string", "minLength": 1 },
-    "ce_instructions": { "type": "string" },
-    "advisor_confidence": { "enum": ["high", "medium", "low"] }
+    "artifacts": {
+      "type": "object",
+      "required": ["proof_bundle", "quality_report"],
+      "properties": {
+        "proof_bundle": { "type": "string", "minLength": 1 },
+        "quality_report": { "type": "string", "minLength": 1 }
+      }
+    },
+    "next_action": { "type": "string", "minLength": 1 }
   }
 }

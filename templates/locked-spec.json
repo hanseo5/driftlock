@@ -3,6 +3,17 @@
   "title": "Example Locked Spec",
   "status": "locked",
   "intent": "A concise but specific product intent statement with enough context for implementation agents.",
+  "product_shape": {
+    "primary_user": "The person who will use the product first.",
+    "first_screen": "A concrete description of what the user sees first.",
+    "core_flow": "The shortest path from first screen to the primary outcome.",
+    "ux_principles": [
+      "Simple, visible, and low-friction.",
+      "No product-shape drift without amendment."
+    ],
+    "approved_preview": true,
+    "approval_source": "user"
+  },
   "goals": ["Deliver the primary user-visible outcome."],
   "non_goals": ["Avoid adjacent functionality in this version."],
   "success_criteria": [
@@ -25,13 +36,74 @@
       "id": "D1",
       "question": "What is the primary v1 outcome?",
       "answer": "The smallest complete version of the primary flow.",
-      "source": "grill-me"
+      "source": "office-hours"
+    },
+    {
+      "id": "D2",
+      "question": "Is the UX/product shape approved for implementation?",
+      "answer": "Yes. The approved UX preview is the implementation target.",
+      "source": "ux-approval"
+    }
+  ],
+  "decision_policy": [
+    {
+      "class": "mechanical",
+      "owner": "harness",
+      "default_action": "auto-resolve with evidence"
+    },
+    {
+      "class": "taste",
+      "owner": "user",
+      "default_action": "show recommendation and request approval"
+    },
+    {
+      "class": "user-challenge",
+      "owner": "user",
+      "default_action": "translate into product options"
+    },
+    {
+      "class": "safety-destructive",
+      "owner": "user",
+      "default_action": "require explicit approval"
     }
   ],
   "gate_evidence": {
-    "intent_gate": "pass",
+    "office_hours_gate": "pass",
+    "brainstorm_gate": "pass",
     "grill_gate": "pass",
+    "intent_brief_gate": "pass",
+    "decision_policy_gate": "pass",
+    "ux_preview_gate": "pass",
+    "ux_approval_gate": "pass",
     "spec_gate": "pass",
     "analyze_gate": "pass"
+  },
+  "spec_evidence": {
+    "data_model": {
+      "status": "not_applicable",
+      "reason": "The example spec proves harness flow and does not introduce durable domain entities."
+    },
+    "non_functional_quality": [
+      "Spec validation must be deterministic and repeatable.",
+      "Final handoff must require proof evidence."
+    ],
+    "integrations": {
+      "status": "not_applicable",
+      "reason": "The example spec does not connect to external services."
+    },
+    "edge_failure": [
+      "Weak specs are blocked before task split.",
+      "UX drift requires fixer or amendment routing."
+    ],
+    "constraints_tradeoffs": [
+      "Driftlock exposes only driftlock-* skills.",
+      "Vendored Spec Kit material is reference input, not a public command surface."
+    ],
+    "terminology": [
+      "Locked Spec",
+      "Spec Gate",
+      "UX Lock",
+      "Proof Bundle"
+    ]
   }
 }

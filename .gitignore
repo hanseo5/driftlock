@@ -1,6 +1,4 @@
-.driftlock/runs/
-.driftlock/tmp/
-.driftlock/dry-run/
+.driftlock/
 __pycache__/
 *.pyc
 .pytest_cache/

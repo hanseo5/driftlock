@@ -1,0 +1,34 @@
+{
+  "run_id": "example-run",
+  "spec_id": "spec-example",
+  "task_id": "T1",
+  "title": "Implement the primary flow",
+  "branch": "task/primary-flow",
+  "role": "implementer",
+  "state": "TASK_READY",
+  "status": "ready",
+  "worktree": ".driftlock/worktrees/T1",
+  "covers": ["SC1", "AS1"],
+  "dependencies": [],
+  "acceptance_criteria": ["SC1 is satisfied by automated or manual verification."],
+  "parallel_group": "foundation",
+  "write_scope": ["Sources/PottsCore"],
+  "merge_risk": "low",
+  "attempts": {
+    "implementation_attempts": 0,
+    "build_attempts": 0,
+    "review_attempts": 0,
+    "fix_attempts": 0,
+    "ce_cycles": 0
+  },
+  "gates": {
+    "implementation": "pending",
+    "build": "pending",
+    "review": "pending",
+    "merge": "pending",
+    "ce": "not-needed",
+    "amendment": "not-needed"
+  },
+  "next_allowed_events": ["implementation-started"],
+  "history": []
+}

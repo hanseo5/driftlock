@@ -1,0 +1,68 @@
+{
+  "spec_id": "spec-example",
+  "status": "pass",
+  "upstream_source": {
+    "repo": "spec-kit",
+    "adapter": "driftlock-spec-gate",
+    "paths": [
+      "third_party/upstream/spec-kit/templates/commands/clarify.md",
+      "third_party/upstream/spec-kit/templates/commands/analyze.md",
+      "third_party/upstream/spec-kit/templates/commands/specify.md",
+      "third_party/upstream/spec-kit/templates/checklist-template.md"
+    ]
+  },
+  "categories": {
+    "functional_scope": {
+      "status": "pass",
+      "summary": "Goals and non-goals are explicit."
+    },
+    "data_model": {
+      "status": "not_applicable",
+      "summary": "Data model is explicitly not applicable."
+    },
+    "ux_flow": {
+      "status": "pass",
+      "summary": "Approved product shape and UX evidence are present."
+    },
+    "non_functional_quality": {
+      "status": "pass",
+      "summary": "Non-functional quality evidence is present."
+    },
+    "integrations": {
+      "status": "not_applicable",
+      "summary": "Integrations are explicitly not applicable."
+    },
+    "edge_failure": {
+      "status": "pass",
+      "summary": "Edge/failure handling evidence is present."
+    },
+    "constraints_tradeoffs": {
+      "status": "pass",
+      "summary": "Constraints/tradeoffs evidence is present."
+    },
+    "terminology": {
+      "status": "pass",
+      "summary": "Terminology evidence is present."
+    },
+    "completion_signals": {
+      "status": "pass",
+      "summary": "Success criteria, acceptance scenarios, and decision policy are testable."
+    },
+    "placeholders": {
+      "status": "pass",
+      "summary": "No unresolved placeholder markers were found."
+    }
+  },
+  "findings": [],
+  "metrics": {
+    "total_findings": 0,
+    "critical_findings": 0,
+    "high_findings": 0,
+    "medium_findings": 0,
+    "low_findings": 0,
+    "category_pass_count": 8,
+    "category_fail_count": 0,
+    "category_not_applicable_count": 2
+  },
+  "next_route": "driftlock-task-split"
+}

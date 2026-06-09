@@ -11,11 +11,12 @@
       "minItems": 1,
       "items": {
         "type": "object",
-        "required": ["id", "title", "branch", "acceptance_criteria", "covers", "dependencies"],
+        "required": ["id", "title", "branch", "role", "acceptance_criteria", "covers", "dependencies"],
         "properties": {
           "id": { "type": "string", "minLength": 1 },
           "title": { "type": "string", "minLength": 1 },
           "branch": { "type": "string", "minLength": 1 },
+          "role": { "enum": ["implementer", "builder", "reviewer", "fixer"] },
           "acceptance_criteria": {
             "type": "array",
             "minItems": 1,

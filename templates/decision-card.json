@@ -1,0 +1,20 @@
+{
+  "id": "decision-example",
+  "class": "taste",
+  "question": "Is the proposed product shape approved for implementation?",
+  "recommended_option": "Approve the shown UX preview before product lock.",
+  "options": [
+    {
+      "id": "approve",
+      "label": "Approve",
+      "consequence": "Proceed to product lock."
+    },
+    {
+      "id": "revise",
+      "label": "Revise preview",
+      "consequence": "Return to UX preview before product lock."
+    }
+  ],
+  "requires_user_approval": true,
+  "selected_option": null
+}

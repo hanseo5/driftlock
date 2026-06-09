@@ -1,0 +1,28 @@
+{
+  "task_id": "T1",
+  "status": "approved",
+  "reviewer_read_only": true,
+  "code_edits_made": false,
+  "review_stages": [
+    {
+      "stage": "spec-compliance-review",
+      "status": "approved",
+      "summary": "Implementation matches the assigned task and Locked Spec."
+    },
+    {
+      "stage": "code-quality-review",
+      "status": "approved",
+      "summary": "No blocking code quality issues were found."
+    }
+  ],
+  "findings": [
+    {
+      "severity": "P3",
+      "category": "example",
+      "summary": "Example low-risk finding shape.",
+      "evidence": "Template placeholder only.",
+      "owner": "human",
+      "requires_verification": false
+    }
+  ]
+}

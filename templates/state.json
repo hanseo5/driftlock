@@ -1,8 +1,23 @@
 {
   "task_id": "T1",
+  "runner_state": "IMPLEMENTING",
+  "strategy": "completeness-first",
+  "ux_lock_status": "locked",
   "debug_attempts": 0,
   "ce_cycles": 0,
   "review_rejects": 0,
+  "proof_bundle": {
+    "status": "in-progress",
+    "gates": {
+      "ux_guard": "pending",
+      "build": "pending",
+      "review": "pending",
+      "amendment": "pending",
+      "integration": "pending",
+      "qa": "pending",
+      "proof": "pending"
+    }
+  },
   "status": "in-progress",
   "history": []
 }

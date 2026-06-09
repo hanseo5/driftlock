@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock Spec Gate"
+  short_description: "Validate the Locked Spec before task split."
+  default_prompt: "Use Driftlock Spec Gate for the Driftlock workflow."

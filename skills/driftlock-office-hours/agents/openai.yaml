@@ -1,0 +1,4 @@
+interface:
+  display_name: "Driftlock Office Hours"
+  short_description: "Interrogate the product request before planning."
+  default_prompt: "Use Driftlock Office Hours for the Driftlock workflow."

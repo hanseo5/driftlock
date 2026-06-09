@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Driftlock Spec Gate Report",
+  "type": "object",
+  "required": ["spec_id", "status", "upstream_source", "categories", "findings", "metrics", "next_route"],
+  "properties": {
+    "spec_id": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["pass", "fail"] },
+    "upstream_source": {
+      "type": "object",
+      "required": ["repo", "adapter", "paths"],
+      "properties": {
+        "repo": { "const": "spec-kit" },
+        "adapter": { "type": "string", "minLength": 1 },
+        "paths": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "categories": {
+      "type": "object",
+      "required": [
+        "functional_scope",
+        "data_model",
+        "ux_flow",
+        "non_functional_quality",
+        "integrations",
+        "edge_failure",
+        "constraints_tradeoffs",
+        "terminology",
+        "completion_signals",
+        "placeholders"
+      ],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status", "summary"],
+        "properties": {
+          "status": { "enum": ["pass", "fail", "not_applicable"] },
+          "summary": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "severity", "summary", "recommendation", "source"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "category": { "type": "string", "minLength": 1 },
+          "severity": { "enum": ["critical", "high", "medium", "low"] },
+          "summary": { "type": "string", "minLength": 1 },
+          "recommendation": { "type": "string", "minLength": 1 },
+          "source": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "total_findings",
+        "critical_findings",
+        "high_findings",
+        "medium_findings",
+        "low_findings",
+        "category_pass_count",
+        "category_fail_count",
+        "category_not_applicable_count"
+      ]
+    },
+    "next_route": { "type": "string", "minLength": 1 }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "run_id": "example-run",
+  "spec_id": "spec-example",
+  "status": "ready",
+  "upstream_source": {
+    "repo": "superpowers",
+    "adapter": "driftlock-execution-loop",
+    "paths": [
+      "third_party/upstream/superpowers/skills/subagent-driven-development",
+      "third_party/upstream/superpowers/skills/using-git-worktrees",
+      "third_party/upstream/superpowers/skills/verification-before-completion"
+    ]
+  },
+  "task_count": 1,
+  "tasks": [
+    {
+      "task_id": "T1",
+      "title": "Implement the primary flow",
+      "branch": "task/primary-flow",
+      "role": "implementer",
+      "state": "TASK_READY",
+      "status": "ready",
+      "worktree": ".driftlock/worktrees/T1",
+      "state_path": ".driftlock/runs/example-run/tasks/T1/state.json",
+      "dependencies": [],
+      "covers": ["SC1", "AS1"],
+      "parallel_group": "foundation",
+      "write_scope": ["Sources/PottsCore"],
+      "merge_risk": "low",
+      "attempts": {
+        "implementation_attempts": 0,
+        "build_attempts": 0,
+        "review_attempts": 0,
+        "fix_attempts": 0,
+        "ce_cycles": 0
+      },
+      "gates": {
+        "implementation": "pending",
+        "build": "pending",
+        "review": "pending",
+        "merge": "pending",
+        "ce": "not-needed",
+        "amendment": "not-needed"
+      },
+      "next_allowed_events": ["implementation-started"]
+    }
+  ],
+  "metrics": {
+    "ready": 1,
+    "in_progress": 0,
+    "done": 0,
+    "blocked": 0,
+    "total": 1
+  }
+}

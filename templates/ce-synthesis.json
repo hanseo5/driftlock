@@ -1,0 +1,73 @@
+{
+  "run_id": "example-run",
+  "spec_id": "spec-example",
+  "status": "ready",
+  "upstream_source": {
+    "repo": "compound-engineering-plugin",
+    "adapter": "driftlock-ce-synthesis",
+    "paths": [
+      "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-compound",
+      "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-debug",
+      "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-compound/references/schema.yaml",
+      "third_party/upstream/gstack/learn",
+      "third_party/upstream/gstack/context-save"
+    ]
+  },
+  "trigger": {
+    "kind": "review_reject",
+    "severity": "high",
+    "summary": "Reviewer rejected the implementation and the failure needs synthesis before another retry.",
+    "source": "review-report.status=rejected"
+  },
+  "failure_clusters": [
+    {
+      "id": "CE-001",
+      "kind": "review_reject",
+      "severity": "high",
+      "summary": "Reviewer rejected the implementation and the failure needs synthesis before another retry.",
+      "evidence": ["review-report.status=rejected"],
+      "owners": ["fixer"]
+    }
+  ],
+  "root_cause_hypothesis": {
+    "summary": "The current failure loop is likely caused by an untested assumption in the previous fix strategy, not by a lack of another retry.",
+    "confidence": "medium",
+    "supporting_evidence": ["review-report.status=rejected"]
+  },
+  "what_did_not_work": [
+    "Prior implementation reached reviewer but did not satisfy review criteria."
+  ],
+  "next_fix_strategy": {
+    "owner": "fixer",
+    "steps": [
+      "Pick one failure cluster and write the smallest falsifiable fix hypothesis.",
+      "Change only the code or spec surface needed for that hypothesis.",
+      "Run the build, regression smoke, and review evidence that previously failed.",
+      "Return through implementer/fixer, then builder, then reviewer before QA or handoff."
+    ]
+  },
+  "verification_plan": [
+    "Rerun the failed build or smoke command.",
+    "Refresh review-report.json with reviewer_read_only=true and code_edits_made=false.",
+    "Refresh quality-report.json before handoff."
+  ],
+  "learning_note": {
+    "status": "not-needed",
+    "key": "review_reject",
+    "summary": "Capture this repeated failure pattern if the next fix succeeds.",
+    "prevention_rule": "Before retrying, state the root-cause hypothesis, the evidence that supports it, and the verification command that will disprove it."
+  },
+  "intent_impact": {
+    "may_change_product_intent": false,
+    "amendment_required": false,
+    "reason": "Failure can be handled inside the locked implementation intent."
+  },
+  "return_route": "driftlock-fixer",
+  "forbidden_routes": ["driftlock-handoff", "driftlock-reviewer"],
+  "artifacts": {
+    "review_report": "review-report.json",
+    "quality_report": "quality-report.json",
+    "execution_plan": "execution-plan.json",
+    "build_evidence": "build-evidence.json"
+  }
+}
