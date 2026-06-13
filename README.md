@@ -42,16 +42,41 @@ confidently. Lodestar removes drift by front-loading the decisions:
 ## How it works
 
 Your intent is the star. Every phase is a flight gate the agents must clear
-before the next — no drift, no skipped steps.
+before the next — no drift, no skipped steps. Lodestar is not a one-way code
+generator; it routes failures back to the correct layer until the product
+matches the approved goal.
 
 ```mermaid
-flowchart LR
-    A[1. BRIEFING<br/>survey · scout<br/>shakedown · manifest] --> B[2. ALIGNMENT<br/>decision call · shape<br/>shape-lock · guard]
-    B -->|product shape approved| C[3. CLEARANCE<br/>lock · checklist<br/>stages]
-    C --> D[4. ASCENT<br/>engineer · integrator<br/>flight-control · eva]
-    D --> E[5. DOCKING<br/>course-correct · debrief<br/>dock + proof]
-    D -.->|repeated failure| E
-    E -.->|intent change| B
+flowchart TB
+    A["User Intent"] --> B["Spec Engine"]
+    B --> C["Build Engine"]
+    C --> D["Proof Engine"]
+    D --> E{"Goal Achieved?"}
+    E -->|Yes| F["Launch-ready Handoff"]
+
+    E -->|Build Issue| C
+    E -->|Spec / UX Issue| B
+    E -->|Intent Change| G["Course Correct"]
+    G --> B
+
+    subgraph R1["Spec Engine"]
+        direction LR
+        S1["Clarify"] --> S2["UX Approval"] --> S3["Spec Sheets"] --> S4["Spec Lock"]
+    end
+
+    subgraph R2["Build Engine"]
+        direction LR
+        B1["Task Graph"] --> B2["Agent Workstreams"] --> B3["TDD Build"] --> B4["Review / Fix"]
+    end
+
+    subgraph R3["Proof Engine"]
+        direction LR
+        P1["Spec Check"] --> P2["UX Check"] --> P3["Quality Evidence"] --> P4["Proof Bundle"]
+    end
+
+    B -. details .-> R1
+    C -. details .-> R2
+    D -. details .-> R3
 ```
 
 1. **BRIEFING** — interrogate the request (survey, scout, shakedown) and write a
@@ -59,8 +84,9 @@ flowchart LR
 2. **ALIGNMENT** — surface genuine choices as decision calls, then show a preview
    of the chosen interface (web / app / none). **You approve the shape before
    code exists.**
-3. **CLEARANCE** — lock the spec only after Spec Kit-style ambiguity and coverage
-   checks pass, then break it into stages.
+3. **CLEARANCE** — complete the product, UX, data, edge-case, QA, and
+   release-readiness spec sheets; lock the spec only after Spec Kit-style
+   ambiguity and coverage checks pass, then break it into stages.
 4. **ASCENT** — agents build in parallel isolated worktrees with TDD and
    subagent-driven development. Flight-control reviews; only EVA repairs.
 5. **DOCKING** — debrief lessons from repeated failures, then dock the result
