@@ -13,6 +13,7 @@
     "developerName": "Driftlock",
     "category": "Productivity",
     "capabilities": [
+      "Single orchestrator front door (driftlock-start)",
       "20 first-class Driftlock skills",
       "Vendored reference contracts",
       "Completeness-first run records",
