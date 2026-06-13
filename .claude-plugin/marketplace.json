@@ -1,8 +1,8 @@
 {
   "name": "lodestar",
   "owner": {
-    "name": "hanseo5",
-    "url": "https://github.com/hanseo5"
+    "name": "builder-seoro",
+    "url": "https://github.com/builder-seoro"
   },
   "metadata": {
     "description": "Lodestar marketplace: completeness-first AI development delegation harness.",
@@ -16,7 +16,7 @@
       "version": "0.1.0",
       "category": "productivity",
       "license": "MIT",
-      "homepage": "https://github.com/hanseo5/lodestar"
+      "homepage": "https://github.com/builder-seoro/lodestar"
     }
   ]
 }

@@ -68,14 +68,15 @@ flowchart LR
 
 ## Install
 
-> The commands below assume the GitHub repo is named `lodestar`. If you are
-> renaming an existing `driftlock` repo, rename it in **Settings → General →
-> Repository name** first — GitHub redirects the old URL automatically.
+> These commands resolve `github.com/builder-seoro/lodestar`, so the GitHub repo
+> must be named **Lodestar** (names are case-insensitive in URLs). Rename it
+> under **Settings → General → Repository name** if it is still spelled
+> differently — GitHub keeps the old URL redirecting.
 
 ### Claude Code (recommended)
 
 ```
-/plugin marketplace add hanseo5/lodestar
+/plugin marketplace add builder-seoro/lodestar
 /plugin install lodestar@lodestar
 ```
 
@@ -88,7 +89,7 @@ Then start a run from a single request:
 ### OpenAI Codex
 
 ```bash
-git clone https://github.com/hanseo5/lodestar.git ~/.codex/plugins/lodestar
+git clone https://github.com/builder-seoro/lodestar.git ~/.codex/plugins/lodestar
 ```
 
 Then in Codex, invoke the **Lodestar Mission Control** skill (or ask: "use Lodestar to
@@ -144,10 +145,10 @@ Install the engine CLI (zero deps, so this is instant):
 
 ```bash
 # one-off run, nothing installed (needs uv)
-uvx --from git+https://github.com/hanseo5/lodestar.git lodestar --help
+uvx --from git+https://github.com/builder-seoro/lodestar.git lodestar --help
 
 # or install the `lodestar` command for good
-uv tool install git+https://github.com/hanseo5/lodestar.git
+uv tool install git+https://github.com/builder-seoro/lodestar.git
 
 # or with pip, from a checkout
 pip install -e .
