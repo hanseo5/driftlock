@@ -1,0 +1,19 @@
+{
+  "name": "driftlock",
+  "version": "0.1.0",
+  "description": "Completeness-first, UX-first AI development delegation harness. Approve product shape before agents write code.",
+  "author": {
+    "name": "hanseo5"
+  },
+  "homepage": "https://github.com/hanseo5/driftlock",
+  "repository": "https://github.com/hanseo5/driftlock",
+  "license": "MIT",
+  "keywords": [
+    "spec-driven-development",
+    "ai-agents",
+    "harness",
+    "delegation",
+    "gated-workflow",
+    "compound-engineering"
+  ]
+}

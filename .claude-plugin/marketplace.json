@@ -1,0 +1,22 @@
+{
+  "name": "driftlock",
+  "owner": {
+    "name": "hanseo5",
+    "url": "https://github.com/hanseo5"
+  },
+  "metadata": {
+    "description": "Driftlock marketplace: completeness-first AI development delegation harness.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "driftlock",
+      "source": "./",
+      "description": "Completeness-first, UX-first AI development delegation harness. Approve product shape before agents write code. 20 gated skills + a deterministic Python safety engine, built on Spec Kit, Superpowers, Compound Engineering, and gstack contracts.",
+      "version": "0.1.0",
+      "category": "productivity",
+      "license": "MIT",
+      "homepage": "https://github.com/hanseo5/driftlock"
+    }
+  ]
+}
