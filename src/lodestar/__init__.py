@@ -6,7 +6,7 @@ execution, and drives a deterministic dry-run.
 """
 from __future__ import annotations
 
-from .engine import main
+from .cli import main
 
 __version__ = "0.1.0"
 __all__ = ["main", "__version__"]
