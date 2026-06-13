@@ -1,4 +1,0 @@
-interface:
-  display_name: "Driftlock Handoff"
-  short_description: "Deliver only after all gates pass."
-  default_prompt: "Use Driftlock Handoff for the Driftlock workflow."

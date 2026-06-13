@@ -7,7 +7,7 @@
   "role": "implementer",
   "state": "TASK_READY",
   "status": "ready",
-  "worktree": ".driftlock/worktrees/T1",
+  "worktree": ".lodestar/worktrees/T1",
   "covers": ["SC1", "AS1"],
   "dependencies": [],
   "acceptance_criteria": ["SC1 is satisfied by automated or manual verification."],

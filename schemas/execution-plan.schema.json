@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Driftlock Execution Plan",
+  "title": "Lodestar Execution Plan",
   "type": "object",
   "required": ["run_id", "spec_id", "status", "upstream_source", "task_count", "tasks", "metrics"],
   "properties": {

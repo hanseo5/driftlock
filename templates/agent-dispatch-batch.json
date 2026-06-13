@@ -11,23 +11,23 @@
       "task_id": "T1",
       "title": "Implement the primary flow",
       "role": "implementer",
-      "skill": "driftlock-implementer",
+      "skill": "lodestar-engineer",
       "current_state": "IMPLEMENTING",
-      "worktree": ".driftlock/worktrees/T1",
+      "worktree": ".lodestar/worktrees/T1",
       "branch": "task/primary-flow",
       "parallel_group": "foundation",
       "write_scope": ["Sources/PottsCore"],
       "merge_risk": "low",
       "expected_events": ["implementation-ready", "implementation-blocked"],
       "output_artifact": "implementation-handoff.json",
-      "prompt": "You are the implementer subagent for Driftlock task T1."
+      "prompt": "You are the implementer subagent for Lodestar task T1."
     }
   ],
   "blocked_ready": [],
   "input_artifacts": {
     "locked_spec": "locked-spec.json",
     "task_graph": "task-graph.json",
-    "execution_plan": ".driftlock/runs/example-run/execution-plan.json"
+    "execution_plan": ".lodestar/runs/example-run/execution-plan.json"
   },
   "upstream_source": {
     "repo": "superpowers",
@@ -52,8 +52,8 @@
     "reviewer_read_only": true,
     "merge_required": true,
     "user_owns_product_intent": true,
-    "ce_forbidden_routes": ["driftlock-handoff", "driftlock-reviewer"],
-    "ce_return_routes": ["driftlock-amend-advisor", "driftlock-fixer", "driftlock-implementer"]
+    "ce_forbidden_routes": ["lodestar-dock", "lodestar-flight-control"],
+    "ce_return_routes": ["lodestar-course-correct", "lodestar-eva", "lodestar-engineer"]
   },
   "metrics": {
     "dispatchable": 1,

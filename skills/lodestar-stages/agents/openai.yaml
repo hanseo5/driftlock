@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Stages"
+  short_description: "Split the locked spec into branch-sized tasks."
+  default_prompt: "Use Lodestar Stages for the Lodestar workflow."

@@ -19,8 +19,8 @@
     "quality_report": "quality-report.json",
     "browser_evidence": "browser-evidence.json",
     "proof_bundle": "proof-bundle.json",
-    "ce_synthesis": "ce-synthesis.json",
-    "ce_brief": "ce-brief.md",
+    "debrief": "debrief.json",
+    "debrief_brief": "debrief-brief.md",
     "handoff": "final-handoff.json"
   },
   "summary": "All proof bundle gates passed."

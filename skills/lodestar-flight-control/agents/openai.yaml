@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Flight Control"
+  short_description: "Review without editing code."
+  default_prompt: "Use Lodestar Flight Control for the Lodestar workflow."

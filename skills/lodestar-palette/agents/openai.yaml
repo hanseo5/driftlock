@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Palette"
+  short_description: "Define minimal UI/UX rules before preview."
+  default_prompt: "Use Lodestar Palette for the Lodestar workflow."

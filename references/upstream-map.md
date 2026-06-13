@@ -1,18 +1,18 @@
-# Driftlock Upstream Map
+# Lodestar Upstream Map
 
-Driftlock is now a completeness-first harness. That means upstream projects are
-not merely inspiration; selected files are vendored and mapped into Driftlock's
+Lodestar is now a completeness-first harness. That means upstream projects are
+not merely inspiration; selected files are vendored and mapped into Lodestar's
 own contracts.
 
 ## Import Rule
 
-Vendored upstream skills and templates are reference material. The Driftlock
-plugin exposes only `driftlock-*` skills, and those skills must route through
-Driftlock gates, runner states, and artifact validators.
+Vendored upstream skills and templates are reference material. The Lodestar
+plugin exposes only `lodestar-*` skills, and those skills must route through
+Lodestar gates, runner states, and artifact validators.
 
 ## Layers
 
-| Layer | Primary upstream | Driftlock responsibility |
+| Layer | Primary upstream | Lodestar responsibility |
 | --- | --- | --- |
 | Office Hours UI | gstack, Superpowers | Turn raw requests into decision cards and approved product shape. |
 | Spec Engine | Spec Kit | Clarify, analyze, specify, plan, and task-split with locked evidence. |
@@ -23,8 +23,8 @@ Driftlock gates, runner states, and artifact validators.
 
 ## Adapter Requirement
 
-Every upstream behavior must pass through a Driftlock adapter. The adapter
-translates foreign skill assumptions into Driftlock primitives:
+Every upstream behavior must pass through a Lodestar adapter. The adapter
+translates foreign skill assumptions into Lodestar primitives:
 
 - input artifact
 - output artifact

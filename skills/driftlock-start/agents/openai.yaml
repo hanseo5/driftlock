@@ -1,4 +1,0 @@
-interface:
-  display_name: "Driftlock Start"
-  short_description: "Orchestrate a full gated Driftlock delegation run."
-  default_prompt: "Use Driftlock Start to take my product request through the full gated Driftlock workflow."

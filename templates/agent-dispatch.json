@@ -7,7 +7,7 @@
   "mode": "single-agent-fallback",
   "route": {
     "role": "implementer",
-    "skill": "driftlock-implementer",
+    "skill": "lodestar-engineer",
     "mutates_code": true,
     "next_step": "make scoped code changes using TDD and produce implementation-handoff.json",
     "output_artifact": "implementation-handoff.json",
@@ -18,7 +18,7 @@
     "task_id": "T1",
     "title": "Implement the primary flow",
     "branch": "task/primary-flow",
-    "worktree": ".driftlock/worktrees/T1",
+    "worktree": ".lodestar/worktrees/T1",
     "covers": ["SC1", "AS1"],
     "dependencies": [],
     "acceptance_criteria": ["SC1 is satisfied by automated or manual verification."],
@@ -45,8 +45,8 @@
   "input_artifacts": {
     "locked_spec": "locked-spec.json",
     "task_graph": "task-graph.json",
-    "execution_plan": ".driftlock/runs/example-run/execution-plan.json",
-    "task_state": ".driftlock/runs/example-run/tasks/T1/state.json"
+    "execution_plan": ".lodestar/runs/example-run/execution-plan.json",
+    "task_state": ".lodestar/runs/example-run/tasks/T1/state.json"
   },
   "upstream_source": {
     "repo": "superpowers",
@@ -66,8 +66,8 @@
     "builder_required": true,
     "reviewer_read_only": true,
     "user_owns_product_intent": true,
-    "ce_forbidden_routes": ["driftlock-handoff", "driftlock-reviewer"],
-    "ce_return_routes": ["driftlock-amend-advisor", "driftlock-fixer", "driftlock-implementer"]
+    "ce_forbidden_routes": ["lodestar-dock", "lodestar-flight-control"],
+    "ce_return_routes": ["lodestar-course-correct", "lodestar-eva", "lodestar-engineer"]
   },
   "instructions": [
     "Work only on the assigned task and preserve the Locked Spec.",

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Driftlock Decision Card"
-  short_description: "Present product-impacting choices clearly."
-  default_prompt: "Use Driftlock Decision Card for the Driftlock workflow."

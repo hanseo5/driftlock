@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Shape"
+  short_description: "Show the product shape before spec lock."
+  default_prompt: "Use Lodestar Shape for the Lodestar workflow."

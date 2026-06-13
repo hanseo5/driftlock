@@ -1,4 +1,0 @@
-interface:
-  display_name: "Driftlock Compound"
-  short_description: "Escalate repeated failures into CE learning."
-  default_prompt: "Use Driftlock Compound for the Driftlock workflow."

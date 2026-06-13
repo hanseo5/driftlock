@@ -4,12 +4,12 @@
   "mode": "html",
   "target": {
     "type": "html",
-    "source": "ux-preview.html"
+    "source": "shape.html"
   },
   "captured_at": "2026-06-08T00:00:00+00:00",
   "upstream_source": {
     "repo": "gstack",
-    "adapter": "driftlock-browser-qa",
+    "adapter": "lodestar-browser-qa",
     "paths": [
       "third_party/upstream/gstack/qa",
       "third_party/upstream/gstack/qa-only",
@@ -23,7 +23,7 @@
     "height": 900
   },
   "page": {
-    "title": "Driftlock UX Preview",
+    "title": "Lodestar Shape",
     "text_sample": "UX Preview Approved",
     "text_length": 19,
     "headings": ["UX Preview Approved"],
@@ -41,12 +41,12 @@
     "load": {
       "status": "pass",
       "summary": "Loaded HTML artifact.",
-      "evidence": ["ux-preview.html"]
+      "evidence": ["shape.html"]
     },
     "title": {
       "status": "pass",
       "summary": "Page title is present.",
-      "evidence": ["Driftlock UX Preview"]
+      "evidence": ["Lodestar Shape"]
     },
     "expected_text": {
       "status": "pass",

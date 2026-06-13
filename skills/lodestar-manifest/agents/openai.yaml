@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Manifest"
+  short_description: "Compress clarified intent into a handoff artifact."
+  default_prompt: "Use Lodestar Manifest for the Lodestar workflow."

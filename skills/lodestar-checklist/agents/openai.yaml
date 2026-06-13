@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Checklist"
+  short_description: "Validate the Locked Spec before task split."
+  default_prompt: "Use Lodestar Checklist for the Lodestar workflow."

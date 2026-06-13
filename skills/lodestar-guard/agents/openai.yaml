@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Guard"
+  short_description: "Check implementation against the UX lock."
+  default_prompt: "Use Lodestar Guard for the Lodestar workflow."

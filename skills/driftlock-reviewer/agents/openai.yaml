@@ -1,4 +1,0 @@
-interface:
-  display_name: "Driftlock Reviewer"
-  short_description: "Review without editing code."
-  default_prompt: "Use Driftlock Reviewer for the Driftlock workflow."

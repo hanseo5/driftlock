@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Driftlock Task Graph",
+  "title": "Lodestar Task Graph",
   "type": "object",
   "required": ["spec_id", "status", "tasks"],
   "properties": {

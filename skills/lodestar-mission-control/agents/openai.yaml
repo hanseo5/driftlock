@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Mission Control"
+  short_description: "Orchestrate a full gated Lodestar delegation run."
+  default_prompt: "Use Lodestar Mission Control to take my product request through the full gated Lodestar workflow."

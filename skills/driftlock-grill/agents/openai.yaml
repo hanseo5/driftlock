@@ -1,4 +1,0 @@
-interface:
-  display_name: "Driftlock Grill"
-  short_description: "Stress-test product intent one question at a time."
-  default_prompt: "Use Driftlock Grill for the Driftlock workflow."

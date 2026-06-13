@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Call"
+  short_description: "Present product-impacting choices clearly."
+  default_prompt: "Use Lodestar Call for the Lodestar workflow."

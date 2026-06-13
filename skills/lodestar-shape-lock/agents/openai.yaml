@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Shape Lock"
+  short_description: "Capture approval of the shown product shape."
+  default_prompt: "Use Lodestar Shape Lock for the Lodestar workflow."
