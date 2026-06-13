@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Lodestar CE Synthesis",
+  "type": "object",
+  "required": [
+    "run_id",
+    "spec_id",
+    "status",
+    "upstream_source",
+    "trigger",
+    "failure_clusters",
+    "root_cause_hypothesis",
+    "what_did_not_work",
+    "next_fix_strategy",
+    "verification_plan",
+    "learning_note",
+    "intent_impact",
+    "return_route",
+    "forbidden_routes",
+    "artifacts"
+  ],
+  "properties": {
+    "run_id": { "type": "string", "minLength": 1 },
+    "spec_id": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["ready", "blocked"] },
+    "upstream_source": {
+      "type": "object",
+      "required": ["repo", "adapter", "paths"],
+      "properties": {
+        "repo": { "const": "compound-engineering-plugin" },
+        "adapter": { "type": "string", "minLength": 1 },
+        "paths": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "trigger": {
+      "type": "object",
+      "required": ["kind", "severity", "summary", "source"],
+      "properties": {
+        "kind": {
+          "enum": [
+            "build_failure",
+            "review_reject",
+            "quality_failure",
+            "review_integrity",
+            "repeated_failure",
+            "product_intent_conflict"
+          ]
+        },
+        "severity": { "enum": ["critical", "high", "medium", "low"] },
+        "summary": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 }
+      }
+    },
+    "failure_clusters": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "severity", "summary", "evidence", "owners"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "kind": {
+            "enum": [
+              "build_failure",
+              "review_reject",
+              "quality_failure",
+              "review_integrity",
+              "repeated_failure",
+              "product_intent_conflict"
+            ]
+          },
+          "severity": { "enum": ["critical", "high", "medium", "low"] },
+          "summary": { "type": "string", "minLength": 1 },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "owners": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "enum": ["fixer", "implementer", "compound", "amend-advisor"] }
+          }
+        }
+      }
+    },
+    "root_cause_hypothesis": {
+      "type": "object",
+      "required": ["summary", "confidence", "supporting_evidence"],
+      "properties": {
+        "summary": { "type": "string", "minLength": 1 },
+        "confidence": { "enum": ["high", "medium", "low"] },
+        "supporting_evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "what_did_not_work": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "next_fix_strategy": {
+      "type": "object",
+      "required": ["owner", "steps"],
+      "properties": {
+        "owner": { "enum": ["fixer", "implementer", "amend-advisor"] },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "verification_plan": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "learning_note": {
+      "type": "object",
+      "required": ["status", "key", "summary", "prevention_rule"],
+      "properties": {
+        "status": { "enum": ["required", "written", "not-needed"] },
+        "key": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string", "minLength": 1 },
+        "prevention_rule": { "type": "string", "minLength": 1 }
+      }
+    },
+    "intent_impact": {
+      "type": "object",
+      "required": ["may_change_product_intent", "amendment_required", "reason"],
+      "properties": {
+        "may_change_product_intent": { "type": "boolean" },
+        "amendment_required": { "type": "boolean" },
+        "reason": { "type": "string", "minLength": 1 }
+      }
+    },
+    "return_route": {
+      "enum": ["lodestar-eva", "lodestar-engineer", "lodestar-course-correct"]
+    },
+    "forbidden_routes": {
+      "type": "array",
+      "contains": { "const": "lodestar-dock" },
+      "items": { "type": "string" }
+    },
+    "artifacts": {
+      "type": "object",
+      "required": ["review_report", "quality_report", "execution_plan"],
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}

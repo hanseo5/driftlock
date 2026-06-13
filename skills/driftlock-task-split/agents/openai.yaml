@@ -1,4 +1,0 @@
-interface:
-  display_name: "Driftlock Task Split"
-  short_description: "Split the locked spec into branch-sized tasks."
-  default_prompt: "Use Driftlock Task Split for the Driftlock workflow."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Integrator"
+  short_description: "Run build, lint, tests, and runtime checks."
+  default_prompt: "Use Lodestar Integrator for the Lodestar workflow."

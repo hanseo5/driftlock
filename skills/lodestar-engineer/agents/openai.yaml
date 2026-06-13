@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Engineer"
+  short_description: "Make code changes for an assigned task."
+  default_prompt: "Use Lodestar Engineer for the Lodestar workflow."

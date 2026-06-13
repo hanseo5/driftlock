@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Dock"
+  short_description: "Deliver only after all gates pass."
+  default_prompt: "Use Lodestar Dock for the Lodestar workflow."

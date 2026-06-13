@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Scout"
+  short_description: "Explore product options and tradeoffs."
+  default_prompt: "Use Lodestar Scout for the Lodestar workflow."

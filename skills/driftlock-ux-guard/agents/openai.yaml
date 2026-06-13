@@ -1,4 +1,0 @@
-interface:
-  display_name: "Driftlock UX Guard"
-  short_description: "Check implementation against the UX lock."
-  default_prompt: "Use Driftlock UX Guard for the Driftlock workflow."

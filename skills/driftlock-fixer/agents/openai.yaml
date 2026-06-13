@@ -1,4 +1,0 @@
-interface:
-  display_name: "Driftlock Fixer"
-  short_description: "Apply fixes after build or review failure."
-  default_prompt: "Use Driftlock Fixer for the Driftlock workflow."

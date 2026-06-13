@@ -1,4 +1,0 @@
-interface:
-  display_name: "Driftlock UX Preview"
-  short_description: "Show the product shape before spec lock."
-  default_prompt: "Use Driftlock UX Preview for the Driftlock workflow."

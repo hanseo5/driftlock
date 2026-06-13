@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Course Correct"
+  short_description: "Advise on product-impacting spec amendments."
+  default_prompt: "Use Lodestar Course Correct for the Lodestar workflow."

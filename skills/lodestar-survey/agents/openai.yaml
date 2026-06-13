@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Survey"
+  short_description: "Interrogate the product request before planning."
+  default_prompt: "Use Lodestar Survey for the Lodestar workflow."

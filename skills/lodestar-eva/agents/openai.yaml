@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar EVA"
+  short_description: "Apply fixes after build or review failure."
+  default_prompt: "Use Lodestar EVA for the Lodestar workflow."

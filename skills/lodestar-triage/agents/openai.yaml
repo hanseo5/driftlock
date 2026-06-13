@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Triage"
+  short_description: "Classify decisions by owner and approval policy."
+  default_prompt: "Use Lodestar Triage for the Lodestar workflow."

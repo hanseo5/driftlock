@@ -1,4 +1,4 @@
-# Driftlock
+# Lodestar
 
 **Approve the product shape before agents write a line of code.**
 
@@ -6,7 +6,7 @@
 [![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-plugin-7C3AED)](#install)
 [![OpenAI Codex](https://img.shields.io/badge/OpenAI%20Codex-plugin-10A37F)](#install)
 
-Driftlock is a completeness-first, UX-first **AI development delegation harness**.
+Lodestar is a completeness-first, UX-first **AI development delegation harness**.
 It lets a non-developer hand a full, ship-grade build to AI agents — and still
 stay in control, because the agents must lock a detailed spec and get your
 approval on the product shape **before** they implement anything.
@@ -21,7 +21,7 @@ flow with a deterministic safety engine underneath.
 ## Why
 
 Hand a vague request to an agent and you get drift: it builds the wrong thing,
-confidently. Driftlock removes drift by front-loading the decisions:
+confidently. Lodestar removes drift by front-loading the decisions:
 
 - **You only decide what a non-coder can decide.** Product trade-offs, the look
   of the interface, and changes that alter intent. Never worktree mechanics or
@@ -41,69 +41,76 @@ confidently. Driftlock removes drift by front-loading the decisions:
 
 ## How it works
 
+Your intent is the star. Every phase is a flight gate the agents must clear
+before the next — no drift, no skipped steps.
+
 ```mermaid
 flowchart LR
-    A[1. Discovery<br/>office-hours · brainstorm<br/>grill · intent-brief] --> B[2. Decision / UX<br/>decision card · UX preview<br/>UX approval · guard]
-    B -->|product shape approved| C[3. Lock / Plan<br/>product lock · spec gate<br/>task split]
-    C --> D[4. Execution<br/>implementer · builder<br/>reviewer · fixer]
-    D --> E[5. Delivery<br/>amend advisor · compound<br/>handoff + proof]
+    A[1. BRIEFING<br/>survey · scout<br/>shakedown · manifest] --> B[2. ALIGNMENT<br/>decision call · shape<br/>shape-lock · guard]
+    B -->|product shape approved| C[3. CLEARANCE<br/>lock · checklist<br/>stages]
+    C --> D[4. ASCENT<br/>engineer · integrator<br/>flight-control · eva]
+    D --> E[5. DOCKING<br/>course-correct · debrief<br/>dock + proof]
     D -.->|repeated failure| E
     E -.->|intent change| B
 ```
 
-1. **Discovery** — interrogate the request (office hours, brainstorm, grill) and
-   write a grounded intent brief.
-2. **Decision / UX** — surface genuine choices as decision cards, then show a
-   preview of the chosen interface (web / app / none). **You approve the shape
-   before code exists.**
-3. **Lock / Plan** — lock the spec only after Spec Kit-style ambiguity and
-   coverage checks pass, then split it into a task graph.
-4. **Execution** — agents implement in parallel isolated worktrees with TDD and
-   subagent-driven development. Reviewers review; only fixers fix.
-5. **Delivery** — compound lessons from repeated failures, then hand off with a
-   proof bundle. No handoff with a failing gate.
+1. **BRIEFING** — interrogate the request (survey, scout, shakedown) and write a
+   grounded manifest of intent.
+2. **ALIGNMENT** — surface genuine choices as decision calls, then show a preview
+   of the chosen interface (web / app / none). **You approve the shape before
+   code exists.**
+3. **CLEARANCE** — lock the spec only after Spec Kit-style ambiguity and coverage
+   checks pass, then break it into stages.
+4. **ASCENT** — agents build in parallel isolated worktrees with TDD and
+   subagent-driven development. Flight-control reviews; only EVA repairs.
+5. **DOCKING** — debrief lessons from repeated failures, then dock the result
+   with a proof bundle. No handoff with a failing gate.
 
 ## Install
+
+> The commands below assume the GitHub repo is named `lodestar`. If you are
+> renaming an existing `driftlock` repo, rename it in **Settings → General →
+> Repository name** first — GitHub redirects the old URL automatically.
 
 ### Claude Code (recommended)
 
 ```
-/plugin marketplace add hanseo5/driftlock
-/plugin install driftlock@driftlock
+/plugin marketplace add hanseo5/lodestar
+/plugin install lodestar@lodestar
 ```
 
 Then start a run from a single request:
 
 ```
-/driftlock build me a waitlist site with email capture and an admin view
+/lodestar build me a waitlist site with email capture and an admin view
 ```
 
 ### OpenAI Codex
 
 ```bash
-git clone https://github.com/hanseo5/driftlock.git ~/.codex/plugins/driftlock
+git clone https://github.com/hanseo5/lodestar.git ~/.codex/plugins/lodestar
 ```
 
-Then in Codex, invoke the **Driftlock Start** skill (or ask: "use Driftlock to
+Then in Codex, invoke the **Lodestar Mission Control** skill (or ask: "use Lodestar to
 take my idea through the full gated workflow").
 
-That's the whole front door. `/driftlock` (or `driftlock-start`) orchestrates
+That's the whole front door. `/lodestar` (or `lodestar-mission-control`) orchestrates
 all 20 worker skills and every gate for you — you just answer the product
 questions it surfaces.
 
 ## Skills
 
-A single orchestrator (`driftlock-start`) drives 20 first-class worker skills:
+A single orchestrator (`lodestar-mission-control`) drives 20 first-class worker skills:
 
-- **Discovery** — `driftlock-office-hours`, `driftlock-brainstorm`, `driftlock-grill`, `driftlock-intent-brief`
-- **Decision / UX** — `driftlock-decision-classify`, `driftlock-decision-card`, `driftlock-design-system-lite`, `driftlock-ux-preview`, `driftlock-ux-approval`, `driftlock-ux-guard`
-- **Lock / Plan** — `driftlock-product-lock`, `driftlock-spec-gate`, `driftlock-task-split`
-- **Execution** — `driftlock-implementer`, `driftlock-builder`, `driftlock-reviewer`, `driftlock-fixer`
-- **Delivery** — `driftlock-amend-advisor`, `driftlock-compound`, `driftlock-handoff`
+- **Discovery** — `lodestar-survey`, `lodestar-scout`, `lodestar-shakedown`, `lodestar-manifest`
+- **Decision / UX** — `lodestar-triage`, `lodestar-call`, `lodestar-palette`, `lodestar-shape`, `lodestar-shape-lock`, `lodestar-guard`
+- **Lock / Plan** — `lodestar-lock`, `lodestar-checklist`, `lodestar-stages`
+- **Execution** — `lodestar-engineer`, `lodestar-integrator`, `lodestar-flight-control`, `lodestar-eva`
+- **Delivery** — `lodestar-course-correct`, `lodestar-debrief`, `lodestar-dock`
 
 ## Under the hood: the safety engine
 
-The Markdown skills define the agent workflow. [`scripts/driftlock.py`](scripts/driftlock.py)
+The Markdown skills define the agent workflow. [`scripts/lodestar.py`](scripts/lodestar.py)
 (~4,800 lines, 24 subcommands) is the deterministic layer that makes the gates
 real — it validates every artifact against a JSON [schema](schemas/), checks
 task coverage, enforces runner transitions and role safety, and refuses invalid
@@ -114,13 +121,13 @@ Verify the engine end to end with a deterministic dry run (no API calls):
 ```bash
 # macOS / Linux
 python -m pip install -r requirements-dev.txt
-python ./scripts/driftlock.py dry-run --out ./.driftlock/dry-run
+python ./scripts/lodestar.py dry-run --out ./.lodestar/dry-run
 ```
 
 ```powershell
 # Windows PowerShell
 $py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
-& $py .\scripts\driftlock.py dry-run --out .\.driftlock\dry-run
+& $py .\scripts\lodestar.py dry-run --out .\.lodestar\dry-run
 ```
 
 The dry run walks the full pipeline and emits every artifact in the contract
@@ -132,12 +139,12 @@ command surface (`validate`, `spec-gate`, `quality-gate`, `execution-dispatch-ba
 <details>
 <summary><b>Artifact contract</b> (what a run produces)</summary>
 
-`intent-brief.md` · `decision-card.json` · `design-system-lite.md` ·
-`ux-preview.html` · `ux-lock.md` · `locked-spec.json` · `decision-log.jsonl` ·
-`spec-gate-report.json` · `task-graph.json` · `execution-plan.json` ·
+`manifest.md` · `call.json` · `palette.md` ·
+`shape.html` · `shape-lock.md` · `locked-spec.json` · `decision-log.jsonl` ·
+`checklist-report.json` · `task-graph.json` · `execution-plan.json` ·
 `tasks/<task-id>/state.json` · `build-evidence.json` · `review-report.json` ·
 `browser-evidence.json` · `quality-report.json` · `amendment-request.json` ·
-`ce-synthesis.json` · `ce-brief.md` · `proof-bundle.json` · `final-handoff.json`
+`debrief.json` · `debrief-brief.md` · `proof-bundle.json` · `final-handoff.json`
 
 </details>
 
@@ -145,7 +152,7 @@ command surface (`validate`, `spec-gate`, `quality-gate`, `execution-dispatch-ba
 
 Selected upstream material is vendored under [`third_party/upstream/`](third_party/upstream)
 with pinned commits and full attribution in [`NOTICE.md`](NOTICE.md). Upstream
-skills are **not** exposed directly — Driftlock exposes only `driftlock-*` skills
+skills are **not** exposed directly — Lodestar exposes only `lodestar-*` skills
 and adapts upstream behavior through references, validators, and runner states.
 
 - **Spec Kit** — spec/command templates, setup scripts

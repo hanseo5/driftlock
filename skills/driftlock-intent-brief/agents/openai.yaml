@@ -1,4 +1,0 @@
-interface:
-  display_name: "Driftlock Intent Brief"
-  short_description: "Compress clarified intent into a handoff artifact."
-  default_prompt: "Use Driftlock Intent Brief for the Driftlock workflow."

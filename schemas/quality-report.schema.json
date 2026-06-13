@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Driftlock Quality Report",
+  "title": "Lodestar Quality Report",
   "type": "object",
   "required": ["run_id", "spec_id", "status", "upstream_source", "checks", "findings", "metrics", "next_route", "artifacts"],
   "properties": {

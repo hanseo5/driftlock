@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Debrief"
+  short_description: "Escalate repeated failures into CE learning."
+  default_prompt: "Use Lodestar Debrief for the Lodestar workflow."

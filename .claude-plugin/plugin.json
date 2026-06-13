@@ -1,12 +1,12 @@
 {
-  "name": "driftlock",
+  "name": "lodestar",
   "version": "0.1.0",
   "description": "Completeness-first, UX-first AI development delegation harness. Approve product shape before agents write code.",
   "author": {
     "name": "hanseo5"
   },
-  "homepage": "https://github.com/hanseo5/driftlock",
-  "repository": "https://github.com/hanseo5/driftlock",
+  "homepage": "https://github.com/hanseo5/lodestar",
+  "repository": "https://github.com/hanseo5/lodestar",
   "license": "MIT",
   "keywords": [
     "spec-driven-development",

@@ -4,7 +4,7 @@
   "status": "pass",
   "upstream_source": {
     "repo": "gstack",
-    "adapter": "driftlock-quality-gate",
+    "adapter": "lodestar-quality-gate",
     "paths": [
       "third_party/upstream/gstack/qa",
       "third_party/upstream/gstack/qa-only",
@@ -32,7 +32,7 @@
     "ux_alignment": {
       "status": "pass",
       "summary": "UX approval and lock evidence are present.",
-      "evidence": ["approved_preview=True", "ux-lock.md present", "browser_title=Driftlock UX Preview"]
+      "evidence": ["approved_preview=True", "shape-lock.md present", "browser_title=Lodestar Shape"]
     },
     "acceptance_coverage": {
       "status": "pass",
@@ -42,7 +42,7 @@
     "regression_smoke": {
       "status": "pass",
       "summary": "Regression smoke command evidence is present.",
-      "evidence": ["npm test", "browser-evidence=ux-preview.html"]
+      "evidence": ["npm test", "browser-evidence=shape.html"]
     },
     "integration_readiness": {
       "status": "pass",
@@ -72,13 +72,13 @@
     "check_warning_count": 0,
     "check_not_applicable_count": 0
   },
-  "next_route": "driftlock-handoff",
+  "next_route": "lodestar-dock",
   "artifacts": {
     "locked_spec": "locked-spec.json",
     "execution_plan": "execution-plan.json",
     "build_evidence": "build-evidence.json",
     "review_report": "review-report.json",
-    "ux_lock": "ux-lock.md",
+    "ux_lock": "shape-lock.md",
     "browser_evidence": "browser-evidence.json",
     "proof_bundle": "proof-bundle.json"
   }

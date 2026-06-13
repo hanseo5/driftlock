@@ -21,11 +21,11 @@
         "third_party/upstream/spec-kit/scripts/powershell",
         "third_party/upstream/spec-kit/scripts/bash"
       ],
-      "driftlock_layers": ["spec-engine"],
+      "lodestar_layers": ["spec-engine"],
       "target_skills": [
-        "driftlock-product-lock",
-        "driftlock-spec-gate",
-        "driftlock-task-split"
+        "lodestar-lock",
+        "lodestar-checklist",
+        "lodestar-stages"
       ],
       "contract_summary": "Use clarify/analyze/specify/plan/tasks templates and setup scripts as the specification discipline behind Locked Spec and task graph creation."
     },
@@ -50,16 +50,16 @@
         "third_party/upstream/superpowers/skills/finishing-a-development-branch",
         "third_party/upstream/superpowers/skills/executing-plans"
       ],
-      "driftlock_layers": ["office-hours-ui", "execution-engine", "delivery-engine"],
+      "lodestar_layers": ["office-hours-ui", "execution-engine", "delivery-engine"],
       "target_skills": [
-        "driftlock-office-hours",
-        "driftlock-brainstorm",
-        "driftlock-grill",
-        "driftlock-implementer",
-        "driftlock-builder",
-        "driftlock-reviewer",
-        "driftlock-fixer",
-        "driftlock-handoff"
+        "lodestar-survey",
+        "lodestar-scout",
+        "lodestar-shakedown",
+        "lodestar-engineer",
+        "lodestar-integrator",
+        "lodestar-flight-control",
+        "lodestar-eva",
+        "lodestar-dock"
       ],
       "contract_summary": "Use design-before-implementation gates, one-question clarification, fresh subagent execution, worktree isolation, TDD, debugging, verification, and branch finishing patterns."
     },
@@ -80,13 +80,13 @@
         "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-compound",
         "third_party/upstream/compound-engineering-plugin/plugins/compound-engineering/skills/ce-compound-refresh"
       ],
-      "driftlock_layers": ["quality-engine", "compound-memory"],
+      "lodestar_layers": ["quality-engine", "compound-memory"],
       "target_skills": [
-        "driftlock-builder",
-        "driftlock-reviewer",
-        "driftlock-fixer",
-        "driftlock-compound",
-        "driftlock-handoff"
+        "lodestar-integrator",
+        "lodestar-flight-control",
+        "lodestar-eva",
+        "lodestar-debrief",
+        "lodestar-dock"
       ],
       "contract_summary": "Use multi-persona review, JSON finding schemas, action routing, debug/proof/browser-test workflows, worktree assistance, and structured learning documents."
     },
@@ -115,17 +115,17 @@
         "third_party/upstream/gstack/freeze",
         "third_party/upstream/gstack/health"
       ],
-      "driftlock_layers": ["office-hours-ui", "quality-engine", "compound-memory", "delivery-engine"],
+      "lodestar_layers": ["office-hours-ui", "quality-engine", "compound-memory", "delivery-engine"],
       "target_skills": [
-        "driftlock-office-hours",
-        "driftlock-decision-card",
-        "driftlock-design-system-lite",
-        "driftlock-ux-preview",
-        "driftlock-ux-approval",
-        "driftlock-ux-guard",
-        "driftlock-builder",
-        "driftlock-reviewer",
-        "driftlock-handoff"
+        "lodestar-survey",
+        "lodestar-call",
+        "lodestar-palette",
+        "lodestar-shape",
+        "lodestar-shape-lock",
+        "lodestar-guard",
+        "lodestar-integrator",
+        "lodestar-flight-control",
+        "lodestar-dock"
       ],
       "contract_summary": "Use office-hours product judgment, CEO/engineering/design plan review, HTML design preview, live design review, QA, ship, guard, learn, and context persistence concepts."
     }

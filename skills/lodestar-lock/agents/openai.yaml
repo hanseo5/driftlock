@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Lock"
+  short_description: "Create the Locked Spec after UX approval."
+  default_prompt: "Use Lodestar Lock for the Lodestar workflow."

@@ -96,7 +96,7 @@
       "UX drift requires fixer or amendment routing."
     ],
     "constraints_tradeoffs": [
-      "Driftlock exposes only driftlock-* skills.",
+      "Lodestar exposes only lodestar-* skills.",
       "Vendored Spec Kit material is reference input, not a public command surface."
     ],
     "terminology": [

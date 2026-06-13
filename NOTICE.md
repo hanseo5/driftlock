@@ -1,9 +1,9 @@
-# Driftlock Third-Party Notices
+# Lodestar Third-Party Notices
 
-Driftlock vendors selected reference material to build a completeness-first AI
+Lodestar vendors selected reference material to build a completeness-first AI
 development harness. Vendored sources are kept under `third_party/upstream/` and
-are not exposed as first-class Driftlock plugin skills unless explicitly adapted
-into `skills/driftlock-*`.
+are not exposed as first-class Lodestar plugin skills unless explicitly adapted
+into `skills/lodestar-*`.
 
 This notice is not legal advice. It records the upstream attributions that must
 remain with substantial copied portions of the referenced projects.
@@ -42,13 +42,13 @@ remain with substantial copied portions of the referenced projects.
 - Copyright: Copyright (c) 2026 Garry Tan
 - Local root: `third_party/upstream/gstack/`
 
-## Driftlock Adaptation Policy
+## Lodestar Adaptation Policy
 
 - Keep upstream source material traceable by repository, commit, license, and
   local path.
-- Do not expose upstream skill names directly from the Driftlock plugin
-  manifest. Driftlock exposes only `driftlock-*` skills.
-- Adapt upstream behavior into Driftlock contracts, validators, and runner
+- Do not expose upstream skill names directly from the Lodestar plugin
+  manifest. Lodestar exposes only `lodestar-*` skills.
+- Adapt upstream behavior into Lodestar contracts, validators, and runner
   states rather than executing foreign harness preambles directly.
 - Preserve original licenses and copyright notices for all substantial copied
   portions.

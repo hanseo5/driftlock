@@ -1,30 +1,30 @@
 {
-  "name": "driftlock",
+  "name": "lodestar",
   "version": "0.1.0",
   "description": "Completeness-first UX-first AI development delegation harness.",
   "author": {
-    "name": "Driftlock"
+    "name": "Lodestar"
   },
   "skills": "./skills/",
   "interface": {
-    "displayName": "Driftlock",
+    "displayName": "Lodestar",
     "shortDescription": "Reference-grade gated AI development harness.",
-    "longDescription": "Driftlock is a completeness-first UX-first AI development delegation harness. It combines 20 first-class Driftlock skills with vendored Spec Kit, Superpowers, Compound Engineering, and gstack reference contracts so agents can clarify product intent, approve product shape, lock specs, execute with worktrees, review with proof, compound repeated failures, and hand off only after all gates pass.",
-    "developerName": "Driftlock",
+    "longDescription": "Lodestar is a completeness-first UX-first AI development delegation harness. Your intent is the guiding star: it combines 20 first-class Lodestar skills with vendored Spec Kit, Superpowers, Compound Engineering, and gstack reference contracts so agents can clarify product intent, approve product shape, lock specs, execute with worktrees, review with proof, debrief repeated failures, and hand off only after all flight gates pass.",
+    "developerName": "Lodestar",
     "category": "Productivity",
     "capabilities": [
-      "Single orchestrator front door (driftlock-start)",
-      "20 first-class Driftlock skills",
+      "Single orchestrator front door (lodestar-mission-control)",
+      "20 first-class Lodestar skills",
       "Vendored reference contracts",
       "Completeness-first run records",
-      "Office-hours discovery",
-      "UX preview approval",
-      "Product lock loop",
-      "Gated execution",
-      "Conditional CE",
-      "Amendment advisor fallback",
-      "Proof bundle handoff"
+      "Briefing discovery (survey, scout, shakedown)",
+      "Product-shape approval",
+      "Spec-lock loop",
+      "Gated execution (ASCENT)",
+      "Conditional debrief learning",
+      "Course-correct fallback",
+      "Proof bundle docking"
     ],
-    "defaultPrompt": "Use Driftlock to clarify my product intent, show me the product shape first, lock the approved spec, and execute it through a gated long-horizon agent workflow."
+    "defaultPrompt": "Use Lodestar to clarify my product intent, show me the product shape first, lock the approved spec, and execute it through a gated long-horizon agent workflow."
   }
 }

@@ -4,7 +4,7 @@
   "status": "ready",
   "upstream_source": {
     "repo": "superpowers",
-    "adapter": "driftlock-execution-loop",
+    "adapter": "lodestar-execution-loop",
     "paths": [
       "third_party/upstream/superpowers/skills/subagent-driven-development",
       "third_party/upstream/superpowers/skills/using-git-worktrees",
@@ -20,8 +20,8 @@
       "role": "implementer",
       "state": "TASK_READY",
       "status": "ready",
-      "worktree": ".driftlock/worktrees/T1",
-      "state_path": ".driftlock/runs/example-run/tasks/T1/state.json",
+      "worktree": ".lodestar/worktrees/T1",
+      "state_path": ".lodestar/runs/example-run/tasks/T1/state.json",
       "dependencies": [],
       "covers": ["SC1", "AS1"],
       "parallel_group": "foundation",

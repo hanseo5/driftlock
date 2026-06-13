@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Driftlock Proof Bundle",
+  "title": "Lodestar Proof Bundle",
   "type": "object",
   "required": ["run_id", "status", "gates", "artifacts", "summary"],
   "properties": {

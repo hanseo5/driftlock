@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lodestar Shakedown"
+  short_description: "Stress-test product intent one question at a time."
+  default_prompt: "Use Lodestar Shakedown for the Lodestar workflow."
