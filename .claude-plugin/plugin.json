@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "description": "Completeness-first, UX-first AI development delegation harness. Approve product shape before agents write code.",
   "author": {
-    "name": "hanseo5"
+    "name": "builder-seoro"
   },
-  "homepage": "https://github.com/hanseo5/lodestar",
-  "repository": "https://github.com/hanseo5/lodestar",
+  "homepage": "https://github.com/builder-seoro/lodestar",
+  "repository": "https://github.com/builder-seoro/lodestar",
   "license": "MIT",
   "keywords": [
     "spec-driven-development",
