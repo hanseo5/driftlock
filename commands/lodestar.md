@@ -12,6 +12,30 @@ keeping the user's surface tiny: they should only ever be asked to make
 
 User request: $ARGUMENTS
 
+## First: pick a mode
+
+Before anything else, ask the user one question in plain language — how hands-on
+they want to be:
+
+1. **Guided** (default) — "I'll check each product decision with you."
+2. **Express / Autopilot** — "I'll take my recommended option on everything and
+   only stop you for: anything that costs money, anything hard to undo, anything
+   risky, and the product-shape approval."
+
+In **express** mode, auto-take the recommended option on `taste` decisions and
+log them; still always stop for `user-challenge`, `safety-destructive`, cost, or
+irreversible actions, and still show the product-shape preview for approval.
+
+## How to ask the user
+
+- Every question you put to the user carries a **recommended answer** and a
+  **safe default**, written in product language — never implementation jargon
+  (no "spec lock", "worktree", "schema"; say "let's lock this in", "build it",
+  "the plan").
+- The user can always reply "use your recommendations" to accept everything
+  pending at once.
+- Ask `user-challenge` and `safety-destructive` decisions one at a time.
+
 ## How to run
 
 Drive the pipeline by invoking the `lodestar-*` skills in order. Do not skip
@@ -25,7 +49,10 @@ gates. Each phase has a non-negotiable gate enforced by `scripts/lodestar.py`.
    → `lodestar-palette` → `lodestar-shape` →
    `lodestar-shape-lock` → `lodestar-guard`.
    Goal: the user **approves the product shape (a preview of the chosen
-   interface) before any code is written.** Stop and get explicit approval.
+   interface) before any code is written.** `lodestar-shape` writes
+   `shape.html` — **render it for the user** (open it in a browser or capture a
+   screenshot and show it inline); never make a non-developer open a file path.
+   Stop and get explicit approval.
 3. **Lock / Plan** — `lodestar-lock` → `lodestar-checklist` →
    `lodestar-stages`.
    Goal: produce a locked spec that passes Spec Kit-style ambiguity and coverage

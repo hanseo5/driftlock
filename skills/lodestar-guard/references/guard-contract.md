@@ -25,7 +25,7 @@ shape.
 
 ## Required Output
 
-Produce `ux-guard-report.json` with enough evidence for the next Lodestar skill to continue without re-interrogating product intent.
+Produce `guard-report.json` with enough evidence for the next Lodestar skill to continue without re-interrogating product intent.
 
 The Quality/QA adapter also reads `shape-lock.md` and product-shape approval
 evidence. Missing UX lock or browser evidence fails QA and blocks handoff.

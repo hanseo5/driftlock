@@ -70,7 +70,7 @@
           "summary": { "type": "string", "minLength": 1 },
           "recommendation": { "type": "string", "minLength": 1 },
           "source": { "type": "string", "minLength": 1 },
-          "owner": { "enum": ["fixer", "compound", "amend-advisor", "handoff", "human"] }
+          "owner": { "enum": ["fixer", "debrief", "amend-advisor", "handoff", "human"] }
         }
       }
     },

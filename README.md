@@ -98,6 +98,30 @@ That's the whole front door. `/lodestar` (or `lodestar-mission-control`) orchest
 all 20 worker skills and every gate for you — you just answer the product
 questions it surfaces.
 
+## Getting started (no coding required)
+
+You do **not** need to write code. The whole experience:
+
+1. **Install once.** Install [Claude Code](https://claude.com/claude-code) (or
+   OpenAI Codex), then add Lodestar with the one-line install above.
+2. **Say what you want.** Run `/lodestar` and describe your idea in one
+   sentence — e.g. _"a waitlist site with email capture and an admin view."_
+3. **Pick how hands-on to be.** Lodestar asks: **Guided** (it checks each
+   product decision with you) or **Express** (it takes the recommended option
+   for you and only stops for anything risky, costly, hard to undo, or the look
+   of the product).
+4. **Answer a few product questions.** Each one comes with a recommended
+   answer — you can always reply _"use your recommendations."_ No technical
+   questions.
+5. **Approve the look.** Before any code is written, Lodestar shows you a preview
+   of the screens. Approve it, or ask for changes.
+6. **Get the finished result.** Agents build, test, and review it, then hand it
+   back with proof that it works — interrupting you only if a change would alter
+   what you approved.
+
+Nothing is built until you approve the product shape, and nothing ships with a
+failing check.
+
 ## Skills
 
 A single orchestrator (`lodestar-mission-control`) drives 20 first-class worker skills:

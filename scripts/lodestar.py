@@ -72,7 +72,7 @@ PHASES = {
     "reviewer",
     "fixer",
     "amend-advisor",
-    "compound",
+    "debrief",
     "handoff",
 }
 
@@ -370,7 +370,7 @@ EXECUTION_ROUTE_BY_STATE = {
         "expected_events": ["fix-ready", "ce-needed", "amendment-needed"],
     },
     "COMPOUNDING": {
-        "role": "compound",
+        "role": "debrief",
         "skill": "lodestar-debrief",
         "mutates_code": False,
         "next_step": "synthesize repeated failure learning and route back to fixer or implementer",
@@ -1169,8 +1169,8 @@ def validate_review_report_obj(report: dict[str, Any]) -> list[str]:
             require(errors, non_empty_string(finding.get("summary")), f"{prefix}.summary must be non-empty")
             require(
                 errors,
-                finding.get("owner") in {"fixer", "compound", "amend-advisor", "human"},
-                f"{prefix}.owner must be fixer, compound, amend-advisor, or human",
+                finding.get("owner") in {"fixer", "debrief", "amend-advisor", "human"},
+                f"{prefix}.owner must be fixer, debrief, amend-advisor, or human",
             )
             require(errors, isinstance(finding.get("requires_verification"), bool), f"{prefix}.requires_verification must be boolean")
     return errors
@@ -1517,8 +1517,8 @@ def validate_quality_report_obj(report: dict[str, Any]) -> list[str]:
                 high_or_critical = True
             require(
                 errors,
-                finding_item.get("owner") in {"fixer", "compound", "amend-advisor", "handoff", "human"},
-                f"{prefix}.owner must be fixer, compound, amend-advisor, handoff, or human",
+                finding_item.get("owner") in {"fixer", "debrief", "amend-advisor", "handoff", "human"},
+                f"{prefix}.owner must be fixer, debrief, amend-advisor, handoff, or human",
             )
             for field in ("summary", "recommendation", "source"):
                 require(errors, non_empty_string(finding_item.get(field)), f"{prefix}.{field} must be non-empty")
@@ -2179,7 +2179,7 @@ def build_quality_report(
                 "execution_completion",
                 "critical",
                 "Not all execution tasks are done.",
-                "Return unfinished tasks through implementer, builder, reviewer, fixer, or compound as required.",
+                "Return unfinished tasks through implementer, builder, reviewer, fixer, or debrief as required.",
                 "execution-plan.metrics",
             )
         if metrics.get("blocked", 0):
@@ -2228,7 +2228,7 @@ def build_quality_report(
     review_status = "pass"
     if review_report.get("status") != "approved":
         review_status = "fail"
-        quality_finding(findings, "review_integrity", "critical", "Review report is not approved.", "Route rejected findings to fixer or compound.", "review-report.status")
+        quality_finding(findings, "review_integrity", "critical", "Review report is not approved.", "Route rejected findings to fixer or debrief.", "review-report.status")
     if review_report.get("reviewer_read_only") is not True or review_report.get("code_edits_made") is not False:
         review_status = "fail"
         quality_finding(
@@ -2238,7 +2238,7 @@ def build_quality_report(
             "Reviewer integrity contract was violated.",
             "Discard reviewer code edits and rerun review as read-only.",
             "review-report.reviewer_read_only",
-            "compound",
+            "debrief",
         )
     critical_review_findings = []
     for item in review_report.get("findings", []):
@@ -2549,7 +2549,7 @@ def ce_owner_from_route(route_owner: str | None) -> str:
         return "amend-advisor"
     if route_owner == "human":
         return "fixer"
-    if route_owner in {"fixer", "compound"}:
+    if route_owner in {"fixer", "debrief"}:
         return route_owner
     return "fixer"
 
@@ -2654,7 +2654,7 @@ def build_debrief(
             "critical",
             "Reviewer integrity contract was violated.",
             "review-report reviewer_read_only/code_edits_made",
-            "compound",
+            "debrief",
         )
     review_findings = review_report.get("findings")
     if isinstance(review_findings, list):
@@ -2713,7 +2713,7 @@ def build_debrief(
             "high",
             item["summary"],
             item["source"],
-            "compound",
+            "debrief",
         )
 
     if not clusters:
@@ -3272,7 +3272,7 @@ def fake_locked_spec() -> dict[str, Any]:
             },
             "edge_failure": [
                 "Build failure routes to fixer.",
-                "Review rejection routes through compound before returning to fixer.",
+                "Review rejection routes through debrief before returning to fixer.",
                 "Spec conflict routes to amendment advisor with user approval required.",
             ],
             "constraints_tradeoffs": [
@@ -3358,7 +3358,7 @@ def fake_review_report(status: str = "approved") -> dict[str, Any]:
                 "category": "repeat-failure",
                 "summary": "Route needs CE before another blind retry.",
                 "evidence": "Simulated review rejection in dry-run trace.",
-                "owner": "compound",
+                "owner": "debrief",
                 "requires_verification": True,
             }
         ],
@@ -3481,8 +3481,8 @@ def run_dry_run(out_dir: Path) -> dict[str, Any]:
         {"skill": "lodestar-integrator", "phase": "builder", "gate": "fail", "route": "fixer"},
         {"skill": "lodestar-eva", "phase": "fixer", "gate": "pass", "route": "builder"},
         {"skill": "lodestar-integrator", "phase": "builder", "gate": "pass", "route": "reviewer"},
-        {"skill": "lodestar-flight-control", "phase": "reviewer", "gate": "fail", "route": "compound"},
-        {"skill": "lodestar-debrief", "phase": "compound", "gate": "pass", "route": "fixer"},
+        {"skill": "lodestar-flight-control", "phase": "reviewer", "gate": "fail", "route": "debrief"},
+        {"skill": "lodestar-debrief", "phase": "debrief", "gate": "pass", "route": "fixer"},
         {"skill": "lodestar-eva", "phase": "fixer", "gate": "pass", "route": "builder"},
         {"skill": "lodestar-integrator", "phase": "builder", "gate": "pass", "route": "reviewer"},
         {"skill": "lodestar-flight-control", "phase": "reviewer", "gate": "pass", "route": "merge"},
@@ -4575,7 +4575,7 @@ def command_negative_checks(args: argparse.Namespace) -> dict[str, Any]:
         ("merge-ready blocks direct handoff", {"runner_state": "MERGE_READY"}, "handoff-ready"),
         ("QA blocks direct handoff", {"runner_state": "QA_READY"}, "handoff-ready"),
         ("proof blocks direct handoff", {"runner_state": "PROOF_READY"}, "handoff-ready"),
-        ("compound blocks handoff-ready", {"runner_state": "COMPOUNDING"}, "handoff-ready"),
+        ("debrief blocks handoff-ready", {"runner_state": "COMPOUNDING"}, "handoff-ready"),
         ("amend advisor blocks auto-approve", {"runner_state": "AMENDMENT_PENDING"}, "auto-approve"),
     ]
     passed = []
@@ -4937,7 +4937,7 @@ def command_negative_checks(args: argparse.Namespace) -> dict[str, Any]:
             "severity": "high",
             "summary": "Repeated failure without learning note should be blocked.",
             "evidence": ["execution-plan.tasks.T1.attempts"],
-            "owners": ["compound"],
+            "owners": ["debrief"],
         }
     )
     repeated_ce["learning_note"]["status"] = "not-needed"

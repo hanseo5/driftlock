@@ -11,10 +11,13 @@ product-level decisions, never mechanical implementation choices.
 
 ## Workflow
 
-Invoke the `lodestar-*` skills in order. Never skip a gate.
+First, set the run mode: ask whether the user wants **guided** (check each
+product decision) or **express** (take recommendations automatically, stop only
+for cost, irreversible, safety, and product-shape approval). Then invoke the
+`lodestar-*` skills in order. Never skip a gate.
 
 1. Discovery: `lodestar-survey` -> `lodestar-scout` -> `lodestar-shakedown` -> `lodestar-manifest`.
-2. Decision/UX: `lodestar-triage` -> `lodestar-call` -> `lodestar-palette` -> `lodestar-shape` -> `lodestar-shape-lock` -> `lodestar-guard`. Stop for explicit product-shape approval.
+2. Decision/UX: `lodestar-triage` -> `lodestar-call` -> `lodestar-palette` -> `lodestar-shape` -> `lodestar-shape-lock` -> `lodestar-guard`. Render `shape.html` for the user (browser or screenshot), then stop for explicit product-shape approval.
 3. Lock/Plan: `lodestar-lock` -> `lodestar-checklist` -> `lodestar-stages`.
 4. Execution: `lodestar-engineer` -> `lodestar-integrator` -> `lodestar-flight-control` -> `lodestar-eva`, parallel over worktrees.
 5. Escalation/Delivery: `lodestar-course-correct` -> `lodestar-debrief` -> `lodestar-dock`.
@@ -26,7 +29,10 @@ Invoke the `lodestar-*` skills in order. Never skip a gate.
 - A review role never edits code; route fixes to `lodestar-eva`.
 - Advisor recommendations are never user approval. Product intent, UX changes,
   and amendments stay user-owned.
-- Surface only decision cards, UX preview, amendment approval, and final proof.
+- Every user-facing question carries a recommended answer and a safe default in
+  plain language; the user can reply "use your recommendations" to accept all.
+- Surface only decision cards, the product-shape preview, amendment approval,
+  and final proof.
 
 ## Output
 

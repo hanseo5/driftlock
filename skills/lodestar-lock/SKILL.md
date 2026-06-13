@@ -1,6 +1,6 @@
 ---
 name: lodestar-lock
-description: Create the Locked Spec after UX approval. Use only after intent brief, decision policy, design-system-lite, UX preview, and UX approval exist and product intent is ready to become a Locked Spec.
+description: Create the Locked Spec after UX approval. Use only after the manifest, decision policy, palette, product-shape preview, and shape approval exist and product intent is ready to become a Locked Spec.
 ---
 
 # Lodestar Lock
@@ -12,7 +12,7 @@ Convert approved intent and product shape into the Locked Spec contract.
 1. Verify required upstream artifacts exist.
 2. Write product_shape with approved_preview true.
 3. Record all product-impacting decisions and gate evidence.
-4. Output locked-spec.json and route to spec gate.
+4. Output locked-spec.json and route to the checklist gate.
 
 ## Rules
 

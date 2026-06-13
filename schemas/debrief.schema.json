@@ -83,7 +83,7 @@
           "owners": {
             "type": "array",
             "minItems": 1,
-            "items": { "enum": ["fixer", "implementer", "compound", "amend-advisor"] }
+            "items": { "enum": ["fixer", "implementer", "debrief", "amend-advisor"] }
           }
         }
       }

@@ -40,6 +40,8 @@ The output must capture:
 - Do not write implementation tasks.
 - Do not lock product intent.
 - Do not ask the user to decide mechanical implementation details.
+- Every question you ask the user carries a recommended answer and a safe
+  default, in plain product language — so the user can simply accept it.
 - Do not expose upstream gstack or Superpowers commands as the product flow.
 - Route visual/product-shape questions to `lodestar-shape` or
   `lodestar-call` instead of burying them in prose.

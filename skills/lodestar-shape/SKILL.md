@@ -19,6 +19,9 @@ Make product shape visible before agents write code.
 - Preview is not production code.
 - Do not skip preview for UI products.
 - Do not lock spec until preview is approved.
+- Show the rendered preview to the user — open `shape.html` in a browser or
+  capture a screenshot and present it inline. Never ask a non-developer to open
+  a file path themselves.
 
 ## Output
 
