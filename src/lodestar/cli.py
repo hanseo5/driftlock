@@ -42,6 +42,7 @@ def build_parser() -> argparse.ArgumentParser:
             "task-state",
             "agent-dispatch",
             "agent-dispatch-batch",
+            "responsive-matrix",
         ],
     )
     validate.add_argument("path")
@@ -99,6 +100,26 @@ def build_parser() -> argparse.ArgumentParser:
     browser_collect.add_argument("--timeout", type=int, default=10)
     browser_collect.add_argument("--report-only", action="store_true", help="Write failing evidence without failing the command")
     browser_collect.set_defaults(func=command_browser_collect)
+
+    responsive_matrix = subparsers.add_parser("responsive-matrix", help="Aggregate mobile, tablet, and desktop browser evidence")
+    responsive_matrix.add_argument("--out", required=True, help="Responsive matrix JSON output path")
+    responsive_matrix.add_argument("--run-id")
+    responsive_matrix.add_argument("--mobile", required=True, help="Mobile browser-evidence JSON path")
+    responsive_matrix.add_argument("--tablet", required=True, help="Tablet browser-evidence JSON path")
+    responsive_matrix.add_argument("--desktop", required=True, help="Desktop browser-evidence JSON path")
+    responsive_matrix.add_argument("--require-screenshots", action="store_true", help="Fail unless each viewport evidence contains a screenshot artifact")
+    responsive_matrix.add_argument("--report-only", action="store_true", help="Write failing matrix without failing the command")
+    responsive_matrix.set_defaults(func=command_responsive_matrix)
+
+    design_gate = subparsers.add_parser("design-gate", help="Validate DESIGN.md against the release-quality rubric")
+    design_gate.add_argument("--design", required=True, help="DESIGN.md path")
+    design_gate.add_argument("--shape", help="Optional final shape.html path")
+    design_gate.add_argument("--visual-qa", help="Optional visual-qa.md path")
+    design_gate.add_argument("--responsive-matrix", help="Optional responsive-matrix.json path")
+    design_gate.add_argument("--require-visual-qa", action="store_true", help="Fail unless visual QA evidence records a pass")
+    design_gate.add_argument("--require-responsive-matrix", action="store_true", help="Fail unless mobile/tablet/desktop responsive evidence passes")
+    design_gate.add_argument("--report-only", action="store_true", help="Print failing findings without failing the command")
+    design_gate.set_defaults(func=command_design_gate)
 
     ce_synthesize = subparsers.add_parser("ce-synthesize", help="Synthesize repeated failure evidence into a CE fix brief")
     ce_synthesize.add_argument("--run-dir", required=True, help="Run directory containing Lodestar artifacts")

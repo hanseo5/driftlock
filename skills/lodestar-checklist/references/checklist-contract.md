@@ -64,7 +64,8 @@ The report must score at least:
 ## Gate Rules
 
 - Do not create tasks from a failing spec.
-- Do not downgrade product-shape approval requirements.
+- Do not downgrade wireframe, design-system, visual QA, or final UI/UX approval
+  requirements.
 - Do not hide spec conflicts.
 - Do not treat unanswered product-impacting questions as engineering choices.
 - `critical` or `high` findings make the report fail.

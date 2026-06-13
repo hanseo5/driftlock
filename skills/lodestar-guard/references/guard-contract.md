@@ -17,7 +17,13 @@ shape.
 ## Required Input
 
 - `shape-lock.md`
+- approved `wireframe.html`
+- approved `DESIGN.md`
+- approved `design-preview.html`
 - approved `shape.html`
+- `visual-qa.md` with release-quality pass evidence
+- `responsive-matrix.json` with mobile, tablet, and desktop pass evidence for
+  browser-rendered web surfaces
 - implementation evidence or browser screenshot
 - `browser-evidence.json` when a browser-rendered surface exists
 - `build-evidence.json`
@@ -25,16 +31,21 @@ shape.
 
 ## Required Output
 
-Produce `guard-report.json` with enough evidence for the next Lodestar skill to continue without re-interrogating product intent.
+Produce `guard-report.json` with enough evidence for the next Lodestar skill to
+continue without re-interrogating product intent.
 
-The Quality/QA adapter also reads `shape-lock.md` and product-shape approval
-evidence. Missing UX lock or browser evidence fails QA and blocks handoff.
+The Quality/QA adapter also reads `shape-lock.md` and approval evidence.
+Missing UX lock or browser evidence fails QA and blocks handoff.
 
 ## Gate Rules
 
 - Do not silently accept UX drift.
 - Do not create new product intent.
 - Handoff cannot pass while UX guard fails.
+- Handoff cannot pass when release-quality visual QA is missing or failed for a
+  UI product.
+- Handoff cannot pass when responsive matrix evidence is missing or failing for
+  a browser-rendered web product.
 - QA cannot pass while UX lock, approved preview evidence, or browser evidence
   is missing.
 - Browser evidence must be refreshed after implementation or fixer changes that
@@ -45,4 +56,5 @@ evidence. Missing UX lock or browser evidence fails QA and blocks handoff.
 
 ## Next Route
 
-Route only to the next valid Lodestar skill or to `lodestar-course-correct` when product intent, UX lock, or spec meaning would change.
+Route only to the next valid Lodestar skill or to `lodestar-course-correct`
+when product intent, UX lock, or spec meaning would change.

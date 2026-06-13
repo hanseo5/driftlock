@@ -39,7 +39,9 @@ The runner is no longer only a phase transition checker. It owns the run record:
 The user should see:
 
 - decision cards
-- UX preview approval
+- wireframe approval
+- design-system approval
+- final UI/UX approval
 - amendment approval when product intent changes
 - final handoff with proof
 
@@ -53,7 +55,7 @@ The user should not need to understand:
 
 ## Non-Negotiable Gates
 
-- No implementation before product shape approval.
+- No implementation before wireframe, design-system, and final UI/UX approval.
 - No locked spec before Spec Kit style ambiguity and coverage checks pass.
 - No review role may edit code.
 - Debrief cannot jump directly to review or handoff; it must return through the fixer or implementer and builder roles.

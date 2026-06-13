@@ -20,6 +20,33 @@ from .dryrun import *  # noqa: F401,F403
 from .execution import *  # noqa: F401,F403
 
 
+DESIGN_GATE_REQUIRED_SECTIONS = (
+    "product archetype",
+    "benchmark bar",
+    "visual theme",
+    "color palette",
+    "typography",
+    "component",
+    "layout",
+    "data realism",
+    "release-quality",
+    "visual qa",
+    "do's",
+    "don'ts",
+    "responsive",
+    "agent prompt",
+)
+
+DESIGN_GATE_FORBIDDEN_TEXT = (
+    "todo",
+    "tbd",
+    "[reference product",
+    "[native app",
+    "[rules the ui",
+    "[screenshot path",
+)
+
+
 def check_removed_coarse_skills(skills_dir: Path) -> list[str]:
     errors = []
     for skill in REMOVED_COARSE_SKILLS:
@@ -30,6 +57,136 @@ def check_removed_coarse_skills(skills_dir: Path) -> list[str]:
         if "compatibility" in body.lower() or "wrapper" in body.lower():
             errors.append(f"{skill} still looks like a compatibility wrapper")
     return errors
+
+
+def design_gate_errors(
+    design_text: str,
+    shape_text: str = "",
+    visual_qa_text: str = "",
+    require_visual_qa: bool = False,
+    responsive_matrix: dict[str, Any] | None = None,
+    require_responsive_matrix: bool = False,
+) -> list[str]:
+    errors: list[str] = []
+    lower = design_text.lower()
+    for section in DESIGN_GATE_REQUIRED_SECTIONS:
+        if section not in lower:
+            errors.append(f"DESIGN.md missing release-quality section or signal: {section}")
+    for forbidden in DESIGN_GATE_FORBIDDEN_TEXT:
+        if forbidden in lower:
+            errors.append(f"DESIGN.md contains unresolved placeholder text: {forbidden}")
+
+    benchmark_lines = [
+        line
+        for line in design_text.splitlines()
+        if line.lstrip().startswith(("-", "*"))
+        and any(token in line.lower() for token in ("reference", "benchmark", "linear", "stripe", "notion", "apple", "figma", "github", "vercel"))
+    ]
+    if len(benchmark_lines) < 2:
+        errors.append("DESIGN.md benchmark bar must name at least 2 reference products or design systems.")
+
+    if "first-screen" not in lower and "first screen" not in lower:
+        errors.append("DESIGN.md must define first-screen decision-speed criteria.")
+    if "anti-slop" not in lower and "no mvp" not in lower and "don'ts" not in lower:
+        errors.append("DESIGN.md must define anti-slop constraints.")
+    for viewport in RESPONSIVE_MATRIX_VIEWPORTS:
+        if viewport not in lower:
+            errors.append(f"DESIGN.md responsive behavior must cover {viewport}.")
+    if "320" not in lower and "reflow" not in lower:
+        errors.append("DESIGN.md must define a narrow-width reflow rule such as 320 CSS px or equivalent.")
+    if "component adaptation" not in lower and "component-level" not in lower and "container" not in lower:
+        errors.append("DESIGN.md must define component adaptation rules, not only page-level breakpoints.")
+
+    shape_lower = shape_text.lower()
+    if shape_text:
+        for forbidden in ("lorem ipsum", "placeholder copy", "placeholder text", "wireframe artifact", "mvp artifact"):
+            if forbidden in shape_lower:
+                errors.append(f"shape.html contains non-release preview text: {forbidden}")
+
+    if require_visual_qa:
+        qa_lower = visual_qa_text.lower()
+        if not visual_qa_text.strip():
+            errors.append("visual-qa.md is required before final UI/UX approval.")
+        elif "pass" not in qa_lower:
+            errors.append("visual-qa.md must record a release-quality pass.")
+        for required in ("screenshot", "failures", "fixes", "result"):
+            if required not in qa_lower:
+                errors.append(f"visual-qa.md missing required evidence: {required}")
+        for viewport in RESPONSIVE_MATRIX_VIEWPORTS:
+            if viewport not in qa_lower:
+                errors.append(f"visual-qa.md must record {viewport} QA evidence.")
+
+    if require_responsive_matrix:
+        if not responsive_matrix:
+            errors.append("responsive-matrix.json is required before final UI/UX approval.")
+        else:
+            matrix_errors = validate_responsive_matrix_obj(responsive_matrix)
+            errors.extend(f"responsive-matrix invalid: {error}" for error in matrix_errors)
+            if responsive_matrix.get("status") != "pass":
+                errors.append("responsive-matrix.json must pass mobile, tablet, and desktop.")
+
+    return errors
+
+
+def command_design_gate(args: argparse.Namespace) -> dict[str, Any]:
+    design_path = Path(args.design)
+    shape_path = Path(args.shape) if args.shape else None
+    visual_qa_path = Path(args.visual_qa) if args.visual_qa else None
+    responsive_matrix_path = Path(args.responsive_matrix) if args.responsive_matrix else None
+    design_text = read_optional_text(design_path, "DESIGN.md")
+    shape_text = read_optional_text(shape_path, "shape.html") if shape_path else ""
+    visual_qa_text = read_optional_text(visual_qa_path, "visual QA") if visual_qa_path else ""
+    responsive_matrix = read_optional_json(responsive_matrix_path, "Responsive matrix") if responsive_matrix_path else {}
+    errors = design_gate_errors(
+        design_text,
+        shape_text,
+        visual_qa_text,
+        args.require_visual_qa,
+        responsive_matrix,
+        args.require_responsive_matrix,
+    )
+    result = {
+        "status": "fail" if errors else "pass",
+        "design": str(design_path),
+        "shape": str(shape_path) if shape_path else "",
+        "visual_qa": str(visual_qa_path) if visual_qa_path else "",
+        "responsive_matrix": str(responsive_matrix_path) if responsive_matrix_path else "",
+        "checks": {
+            "required_sections": list(DESIGN_GATE_REQUIRED_SECTIONS),
+            "benchmark_minimum": 2,
+            "visual_qa_required": bool(args.require_visual_qa),
+            "responsive_matrix_required": bool(args.require_responsive_matrix),
+        },
+        "findings": errors,
+    }
+    if errors and not args.report_only:
+        raise LodestarError("Design gate failed:\n- " + "\n- ".join(errors))
+    return result
+
+
+def command_responsive_matrix(args: argparse.Namespace) -> dict[str, Any]:
+    evidence_by_viewport: dict[str, dict[str, Any]] = {}
+    for viewport_name, path_text in (
+        ("mobile", args.mobile),
+        ("tablet", args.tablet),
+        ("desktop", args.desktop),
+    ):
+        path = Path(path_text)
+        evidence = read_json(path)
+        fail_if_errors(validate_browser_evidence_obj(evidence))
+        evidence["_path"] = str(path)
+        evidence_by_viewport[viewport_name] = evidence
+
+    matrix = build_responsive_matrix(
+        run_id=args.run_id or "responsive-matrix",
+        evidence_by_viewport=evidence_by_viewport,
+        require_screenshots=args.require_screenshots,
+    )
+    fail_if_errors(validate_responsive_matrix_obj(matrix))
+    write_json(Path(args.out), matrix)
+    if matrix["status"] == "fail" and not args.report_only:
+        raise LodestarError(f"Responsive matrix failed; report written to {args.out}")
+    return {"status": matrix["status"], "path": args.out, "metrics": matrix["metrics"]}
 
 
 def command_validate(args: argparse.Namespace) -> dict[str, Any]:
@@ -56,6 +213,8 @@ def command_validate(args: argparse.Namespace) -> dict[str, Any]:
         fail_if_errors(validate_spec_gate_report_obj(read_json(path)))
     elif args.kind == "browser-evidence":
         fail_if_errors(validate_browser_evidence_obj(read_json(path)))
+    elif args.kind == "responsive-matrix":
+        fail_if_errors(validate_responsive_matrix_obj(read_json(path)))
     elif args.kind == "quality-report":
         fail_if_errors(validate_quality_report_obj(read_json(path)))
     elif args.kind == "debrief":
@@ -326,6 +485,76 @@ def command_negative_checks(args: argparse.Namespace) -> dict[str, Any]:
         errors.append(f"runner handoff path failed unexpectedly: {exc}")
 
     errors.extend(check_removed_coarse_skills(Path(args.skills_dir)))
+
+    incomplete_design = "# DESIGN.md\n\n## Visual Theme\n\nLooks premium.\n"
+    design_errors = design_gate_errors(incomplete_design)
+    if design_errors:
+        passed.append("design gate blocks missing benchmark and release-quality criteria")
+    else:
+        errors.append("negative check failed: design gate blocks missing benchmark and release-quality criteria")
+
+    complete_design = (
+        "# DESIGN.md\n\n"
+        "## Product Archetype\n\nOperational SaaS.\n\n"
+        "## Benchmark Bar\n\n- Linear reference for density.\n- Stripe Dashboard reference for financial hierarchy.\n\n"
+        "## Visual Theme\n\nCalm operational.\n\n"
+        "## Color Palette\n\nSemantic roles.\n\n"
+        "## Typography\n\nCompact hierarchy.\n\n"
+        "## Component Inventory\n\nTables, forms, states.\n\n"
+        "## Layout Principles\n\nFirst-screen action and priority.\n\n"
+        "## Data Realism\n\nDomain-specific data.\n\n"
+        "## Release-Quality Acceptance Criteria\n\nFirst-screen decision speed and benchmark fit.\n\n"
+        "## Visual QA Checklist\n\nScreenshot, failures, fixes, result.\n\n"
+        "## Do's\n\nPreserve product shape.\n\n"
+        "## Don'ts\n\nNo MVP tells.\n\n"
+        "## Responsive Behavior\n\nMobile, tablet, and desktop. Support 320 CSS px reflow. Component adaptation uses container-level rules.\n\n"
+        "## Agent Prompt Guide\n\nUse this design system.\n"
+    )
+    complete_qa = "# Visual QA\n\nScreenshots: mobile.png, tablet.png, desktop.png\n\nFailures: none.\n\nFixes: none.\n\nMobile: pass.\nTablet: pass.\nDesktop: pass.\n\nResult: pass\n"
+    if not design_gate_errors(complete_design, "<html><main>Approved Surface</main></html>", complete_qa, True):
+        passed.append("design gate accepts benchmarked release-quality evidence")
+    else:
+        errors.append("negative check failed: design gate accepts benchmarked release-quality evidence")
+
+    responsive_evidence: dict[str, dict[str, Any]] = {}
+    for viewport_name in RESPONSIVE_MATRIX_VIEWPORTS:
+        evidence = build_browser_evidence(
+            "negative-responsive",
+            "html",
+            "shape.html",
+            "<!doctype html><html lang=\"en\"><title>Approved Surface</title><main>Approved Surface</main></html>",
+            ["Approved Surface"],
+            viewport_name,
+        )
+        evidence["_path"] = f"browser-evidence-{viewport_name}.json"
+        evidence["artifacts"]["screenshot"] = f"shape-{viewport_name}.png"
+        responsive_evidence[viewport_name] = evidence
+    missing_screenshot_matrix = build_responsive_matrix("negative-responsive", responsive_evidence, require_screenshots=True)
+    missing_screenshot_matrix["viewports"]["mobile"]["screenshot"] = ""
+    missing_screenshot_matrix = build_responsive_matrix(
+        "negative-responsive",
+        {
+            viewport: {
+                **evidence,
+                "artifacts": {
+                    **evidence.get("artifacts", {}),
+                    "screenshot": "" if viewport == "mobile" else evidence.get("artifacts", {}).get("screenshot", ""),
+                },
+            }
+            for viewport, evidence in responsive_evidence.items()
+        },
+        require_screenshots=True,
+    )
+    if missing_screenshot_matrix["status"] == "fail":
+        passed.append("responsive matrix blocks missing mobile screenshot")
+    else:
+        errors.append("negative check failed: responsive matrix blocks missing mobile screenshot")
+
+    complete_matrix = build_responsive_matrix("negative-responsive", responsive_evidence, require_screenshots=True)
+    if not design_gate_errors(complete_design, "<html><main>Approved Surface</main></html>", complete_qa, True, complete_matrix, True):
+        passed.append("design gate accepts passing responsive matrix")
+    else:
+        errors.append("negative check failed: design gate accepts passing responsive matrix")
 
     spec_negative_cases: list[tuple[str, dict[str, Any]]] = []
 

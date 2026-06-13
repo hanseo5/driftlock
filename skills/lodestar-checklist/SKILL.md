@@ -17,7 +17,7 @@ Block weak specs before execution agents receive work.
 ## Rules
 
 - Do not create tasks from a failing spec.
-- Do not downgrade product-shape approval requirements.
+- Do not downgrade wireframe, design-system, or final UI/UX approval requirements.
 - Do not hide spec conflicts.
 
 ## Output

@@ -1,7 +1,7 @@
 {
   "name": "lodestar",
   "version": "0.1.0",
-  "description": "Completeness-first, UX-first AI development delegation harness. Approve product shape before agents write code.",
+  "description": "Turn rough ideas into clear product direction, approved previews, and finished AI-built products.",
   "author": {
     "name": "builder-seoro"
   },
@@ -11,9 +11,9 @@
   "keywords": [
     "spec-driven-development",
     "ai-agents",
-    "harness",
+    "product-direction",
     "delegation",
-    "gated-workflow",
+    "ai-product-building",
     "compound-engineering"
   ]
 }

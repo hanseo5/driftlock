@@ -5,12 +5,12 @@ build-backend = "hatchling.build"
 [project]
 name = "lodestar"
 version = "0.1.0"
-description = "Completeness-first, UX-first AI development delegation harness — the deterministic gate engine."
+description = "Turn rough ideas into clear product direction, approved previews, and finished AI-built products."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "builder-seoro" }]
-keywords = ["spec-driven-development", "ai-agents", "harness", "gated-workflow", "compound-engineering"]
+keywords = ["product-direction", "ai-agents", "product-building", "preview-first", "ai-development"]
 classifiers = [
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",

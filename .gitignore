@@ -4,7 +4,6 @@ __pycache__/
 .pytest_cache/
 node_modules/
 
-.driftlock/
 dist/
 build/
 *.egg-info/

@@ -1,30 +1,25 @@
 {
   "name": "lodestar",
   "version": "0.1.0",
-  "description": "Completeness-first UX-first AI development delegation harness.",
+  "description": "Turn rough ideas into clear product direction, approved previews, and finished AI-built products.",
   "author": {
     "name": "Lodestar"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "Lodestar",
-    "shortDescription": "Reference-grade gated AI development harness.",
-    "longDescription": "Lodestar is a completeness-first UX-first AI development delegation harness. Your intent is the guiding star: it combines 20 first-class Lodestar skills with vendored Spec Kit, Superpowers, Compound Engineering, and gstack reference contracts so agents can clarify product intent, approve product shape, lock specs, execute with worktrees, review with proof, debrief repeated failures, and hand off only after all flight gates pass.",
+    "shortDescription": "Shape an idea, preview it, then build it with AI.",
+    "longDescription": "Lodestar helps users turn rough product ideas into clear direction, approved previews, and finished AI-built products. It keeps the user focused on product choices while the internal workflow handles planning, implementation, testing, review, fixes, and proof.",
     "developerName": "Lodestar",
     "category": "Productivity",
     "capabilities": [
-      "Single orchestrator front door (lodestar-mission-control)",
-      "20 first-class Lodestar skills",
-      "Vendored reference contracts",
-      "Completeness-first run records",
-      "Briefing discovery (survey, scout, shakedown)",
-      "Product-shape approval",
-      "Spec-lock loop",
-      "Gated execution (ASCENT)",
-      "Conditional debrief learning",
-      "Course-correct fallback",
-      "Proof bundle docking"
+      "Simple front door: /lodestar [idea]",
+      "Guided or Express product shaping",
+      "Plain-language product decisions",
+      "Preview approval before implementation",
+      "AI-assisted build, test, review, and fix loop",
+      "Final handoff with proof"
     ],
-    "defaultPrompt": "Use Lodestar to clarify my product intent, show me the product shape first, lock the approved spec, and execute it through a gated long-horizon agent workflow."
+    "defaultPrompt": "Use Lodestar to turn my rough idea into a clear product direction, show me a preview, then build and verify it."
   }
 }

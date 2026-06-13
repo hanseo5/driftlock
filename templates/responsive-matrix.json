@@ -1,0 +1,37 @@
+{
+  "run_id": "example-run",
+  "status": "pass",
+  "required_viewports": ["mobile", "tablet", "desktop"],
+  "viewports": {
+    "mobile": {
+      "status": "pass",
+      "width": 390,
+      "height": 844,
+      "browser_evidence": "browser-evidence-mobile.json",
+      "screenshot": "shape-mobile-screenshot.png",
+      "findings": []
+    },
+    "tablet": {
+      "status": "pass",
+      "width": 834,
+      "height": 1112,
+      "browser_evidence": "browser-evidence-tablet.json",
+      "screenshot": "shape-tablet-screenshot.png",
+      "findings": []
+    },
+    "desktop": {
+      "status": "pass",
+      "width": 1440,
+      "height": 900,
+      "browser_evidence": "browser-evidence.json",
+      "screenshot": "shape-screenshot.png",
+      "findings": []
+    }
+  },
+  "findings": [],
+  "metrics": {
+    "pass_count": 3,
+    "fail_count": 0,
+    "finding_count": 0
+  }
+}

@@ -1,4 +1,4 @@
-"""Lodestar — the deterministic gate engine behind the Lodestar harness.
+"""Lodestar, the deterministic gate engine behind the Lodestar harness.
 
 The Markdown skills carry agent behaviour; this package validates the artifact
 contracts, applies runner transitions, runs the quality and spec gates, plans

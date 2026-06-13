@@ -38,7 +38,7 @@ PHASES = {
     "intent-brief",
     "decision-classify",
     "decision-card",
-    "design-system-lite",
+    "design-system",
     "ux-preview",
     "ux-approval",
     "ux-guard",
@@ -180,6 +180,8 @@ BROWSER_VIEWPORTS = {
     "tablet": {"width": 834, "height": 1112},
     "mobile": {"width": 390, "height": 844},
 }
+RESPONSIVE_MATRIX_VIEWPORTS = ("mobile", "tablet", "desktop")
+RESPONSIVE_MATRIX_STATUSES = {"pass", "fail"}
 
 CE_TRIGGER_KINDS = {
     "build_failure",

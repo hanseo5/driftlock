@@ -417,6 +417,61 @@ def build_browser_evidence(
     }
 
 
+def build_responsive_matrix(
+    run_id: str,
+    evidence_by_viewport: dict[str, dict[str, Any]],
+    require_screenshots: bool = False,
+) -> dict[str, Any]:
+    viewports: dict[str, dict[str, Any]] = {}
+    findings: list[dict[str, str]] = []
+
+    for name in RESPONSIVE_MATRIX_VIEWPORTS:
+        evidence = evidence_by_viewport.get(name, {})
+        viewport = evidence.get("viewport") if isinstance(evidence.get("viewport"), dict) else {}
+        artifacts = evidence.get("artifacts") if isinstance(evidence.get("artifacts"), dict) else {}
+        screenshot = str(artifacts.get("screenshot") or "")
+        evidence_findings = evidence.get("findings") if isinstance(evidence.get("findings"), list) else []
+        browser_status = evidence.get("status")
+        actual_name = str(viewport.get("name") or "")
+
+        viewport_findings: list[str] = []
+        if browser_status != "pass":
+            viewport_findings.append("browser evidence did not pass")
+        if actual_name != name:
+            viewport_findings.append(f"browser evidence viewport is {actual_name or 'missing'}, expected {name}")
+        if require_screenshots and not screenshot:
+            viewport_findings.append("screenshot artifact is required")
+        for item in evidence_findings:
+            if isinstance(item, dict) and item.get("summary"):
+                viewport_findings.append(str(item["summary"]))
+
+        status = "fail" if viewport_findings else "pass"
+        viewports[name] = {
+            "status": status,
+            "width": int(viewport.get("width") or BROWSER_VIEWPORTS[name]["width"]),
+            "height": int(viewport.get("height") or BROWSER_VIEWPORTS[name]["height"]),
+            "browser_evidence": str(evidence.get("_path") or ""),
+            "screenshot": screenshot,
+            "findings": viewport_findings,
+        }
+        findings.extend({"viewport": name, "summary": item} for item in viewport_findings)
+
+    pass_count = sum(1 for item in viewports.values() if item["status"] == "pass")
+    fail_count = len(RESPONSIVE_MATRIX_VIEWPORTS) - pass_count
+    return {
+        "run_id": run_id,
+        "status": "fail" if findings else "pass",
+        "required_viewports": list(RESPONSIVE_MATRIX_VIEWPORTS),
+        "viewports": viewports,
+        "findings": findings,
+        "metrics": {
+            "pass_count": pass_count,
+            "fail_count": fail_count,
+            "finding_count": len(findings),
+        },
+    }
+
+
 def quality_finding(
     findings: list[dict[str, Any]],
     check: str,
@@ -1272,7 +1327,7 @@ def build_spec_gate_report(
     else:
         if product_shape.get("approved_preview") is not True:
             ux_status = "fail"
-            finding(findings, "ux_flow", "critical", "Approved UX preview is missing.", "Get explicit UX preview approval before locking the spec.", "locked-spec.product_shape.approved_preview")
+            finding(findings, "ux_flow", "critical", "Approved UI/UX preview is missing.", "Get explicit wireframe, design-system, and final UI/UX approval before locking the spec.", "locked-spec.product_shape.approved_preview")
         for field in ("primary_user", "first_screen", "core_flow", "approval_source"):
             if not non_empty_string(product_shape.get(field)):
                 ux_status = "fail"
@@ -1282,7 +1337,7 @@ def build_spec_gate_report(
             finding(findings, "ux_flow", "high", "UX principles are missing.", "Add UX principles that implementation must preserve.", "locked-spec.product_shape.ux_principles")
     if ux_lock_text.strip() and "Approved" not in ux_lock_text:
         ux_status = "fail"
-        finding(findings, "ux_flow", "high", "UX lock exists but does not contain approval evidence.", "Record approved preview evidence in shape-lock.md.", "ux-lock")
+        finding(findings, "ux_flow", "high", "UX lock exists but does not contain approval evidence.", "Record approved wireframe, design-system, and final UI/UX evidence in shape-lock.md.", "ux-lock")
     if decision_log is not None and len(decision_log) > 0 and accepted_decision_count(decision_log) == 0:
         ux_status = "fail"
         finding(findings, "ux_flow", "high", "Decision log has no accepted decisions.", "Record the accepted UX/product decisions before task split.", "decision-log")

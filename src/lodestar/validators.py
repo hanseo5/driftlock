@@ -922,6 +922,57 @@ def validate_browser_evidence_obj(evidence: dict[str, Any]) -> list[str]:
     return errors
 
 
+def validate_responsive_matrix_obj(matrix: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    for key in ("run_id", "status", "required_viewports", "viewports", "findings", "metrics"):
+        require(errors, key in matrix, f"responsive matrix missing required field: {key}")
+    require(errors, non_empty_string(matrix.get("run_id")), "responsive matrix run_id must be non-empty")
+    require(errors, matrix.get("status") in RESPONSIVE_MATRIX_STATUSES, "responsive matrix status must be pass or fail")
+    require(
+        errors,
+        matrix.get("required_viewports") == list(RESPONSIVE_MATRIX_VIEWPORTS),
+        "responsive matrix required_viewports must be mobile, tablet, desktop",
+    )
+
+    viewports = matrix.get("viewports")
+    require(errors, isinstance(viewports, dict), "responsive matrix viewports must be an object")
+    if isinstance(viewports, dict):
+        missing = [name for name in RESPONSIVE_MATRIX_VIEWPORTS if name not in viewports]
+        require(errors, not missing, f"responsive matrix missing viewports: {', '.join(missing)}")
+        for name, report in viewports.items():
+            prefix = f"viewports.{name}"
+            require(errors, name in RESPONSIVE_MATRIX_VIEWPORTS, f"responsive matrix unknown viewport: {name}")
+            require(errors, isinstance(report, dict), f"responsive matrix {prefix} must be an object")
+            if not isinstance(report, dict):
+                continue
+            require(errors, report.get("status") in RESPONSIVE_MATRIX_STATUSES, f"responsive matrix {prefix}.status must be pass or fail")
+            require(errors, isinstance(report.get("width"), int) and report.get("width") > 0, f"responsive matrix {prefix}.width must be positive")
+            require(errors, isinstance(report.get("height"), int) and report.get("height") > 0, f"responsive matrix {prefix}.height must be positive")
+            require(errors, non_empty_string(report.get("browser_evidence")), f"responsive matrix {prefix}.browser_evidence must be non-empty")
+            require(errors, isinstance(report.get("screenshot"), str), f"responsive matrix {prefix}.screenshot must be a string")
+            require(errors, isinstance(report.get("findings"), list), f"responsive matrix {prefix}.findings must be a list")
+
+    findings = matrix.get("findings")
+    require(errors, isinstance(findings, list), "responsive matrix findings must be a list")
+    if isinstance(findings, list):
+        for index, finding_item in enumerate(findings):
+            prefix = f"findings[{index}]"
+            require(errors, isinstance(finding_item, dict), f"responsive matrix {prefix} must be an object")
+            if isinstance(finding_item, dict):
+                require(errors, non_empty_string(finding_item.get("viewport")), f"responsive matrix {prefix}.viewport must be non-empty")
+                require(errors, non_empty_string(finding_item.get("summary")), f"responsive matrix {prefix}.summary must be non-empty")
+
+    metrics = matrix.get("metrics")
+    require(errors, isinstance(metrics, dict), "responsive matrix metrics must be an object")
+    if isinstance(metrics, dict):
+        for key in ("pass_count", "fail_count", "finding_count"):
+            require(errors, isinstance(metrics.get(key), int) and metrics.get(key) >= 0, f"responsive matrix metrics.{key} must be non-negative")
+
+    if matrix.get("status") == "pass":
+        require(errors, not findings, "passing responsive matrix cannot contain findings")
+    return errors
+
+
 def validate_quality_report_obj(report: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     for key in ("run_id", "spec_id", "status", "upstream_source", "checks", "findings", "metrics", "next_route", "artifacts"):

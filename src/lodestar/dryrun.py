@@ -29,10 +29,10 @@ def fake_locked_spec() -> dict[str, Any]:
         "intent": "Build a local harness flow that proves Lodestar has separate first-class skills before implementation.",
         "product_shape": {
             "primary_user": "A non-developer product owner delegating long-horizon development to AI agents.",
-            "first_screen": "A product-shape preview with first screen, primary flow, and decision card.",
-            "core_flow": "Office Hours to UX Approval to Product Lock to gated execution.",
+            "first_screen": "A wireframe preview, design-system approval, and final UI/UX preview before implementation.",
+            "core_flow": "Office Hours to wireframe approval to design-system approval to final UI/UX approval to Product Lock to gated execution.",
             "ux_principles": [
-                "Show product shape before locking the spec.",
+                "Show wireframe and final UI/UX previews before locking the spec.",
                 "Interrupt the user only for product-impacting decisions.",
                 "Prevent UX drift unless an amendment is approved.",
             ],
@@ -48,7 +48,7 @@ def fake_locked_spec() -> dict[str, Any]:
         "acceptance_scenarios": [
             {
                 "id": "AS1",
-                "given": "The user has approved a UX preview.",
+                "given": "The user has approved the wireframe, design system, and final UI/UX preview.",
                 "when": "The product is locked.",
                 "then": "The Locked Spec contains product-shape evidence and all gates pass.",
             },
@@ -271,6 +271,34 @@ def run_dry_run(out_dir: Path) -> dict[str, Any]:
         expected_text=["UX Preview Approved"],
         viewport_name="desktop",
     )
+    browser_evidence["_path"] = "browser-evidence.json"
+    mobile_browser_evidence = build_browser_evidence(
+        run_id="dry-run",
+        mode="html",
+        source="shape.html",
+        html_text=ux_preview_html,
+        expected_text=["UX Preview Approved"],
+        viewport_name="mobile",
+    )
+    mobile_browser_evidence["_path"] = "browser-evidence-mobile.json"
+    tablet_browser_evidence = build_browser_evidence(
+        run_id="dry-run",
+        mode="html",
+        source="shape.html",
+        html_text=ux_preview_html,
+        expected_text=["UX Preview Approved"],
+        viewport_name="tablet",
+    )
+    tablet_browser_evidence["_path"] = "browser-evidence-tablet.json"
+    responsive_matrix = build_responsive_matrix(
+        "dry-run",
+        {
+            "mobile": mobile_browser_evidence,
+            "tablet": tablet_browser_evidence,
+            "desktop": browser_evidence,
+        },
+    )
+    fail_if_errors(validate_responsive_matrix_obj(responsive_matrix))
     proof_bundle = new_proof_bundle("dry-run", "pass")
     proof_bundle["artifacts"] = {
         "locked_spec": "locked-spec.json",
@@ -282,6 +310,7 @@ def run_dry_run(out_dir: Path) -> dict[str, Any]:
         "amendment_request": "amendment-request.json",
         "quality_report": "quality-report.json",
         "browser_evidence": "browser-evidence.json",
+        "responsive_matrix": "responsive-matrix.json",
         "proof_bundle": "proof-bundle.json",
         "debrief": "debrief.json",
         "debrief_brief": "debrief-brief.md",
@@ -306,8 +335,9 @@ def run_dry_run(out_dir: Path) -> dict[str, Any]:
         {"skill": "lodestar-manifest", "phase": "intent-brief", "gate": "pass"},
         {"skill": "lodestar-triage", "phase": "decision-classify", "gate": "pass"},
         {"skill": "lodestar-call", "phase": "decision-card", "gate": "pass"},
-        {"skill": "lodestar-palette", "phase": "design-system-lite", "gate": "pass"},
-        {"skill": "lodestar-shape", "phase": "ux-preview", "gate": "pass"},
+        {"skill": "lodestar-shape", "phase": "ux-preview", "gate": "pass", "artifact": "wireframe.html"},
+        {"skill": "lodestar-palette", "phase": "design-system", "gate": "pass", "artifact": "DESIGN.md"},
+        {"skill": "lodestar-shape", "phase": "ux-preview", "gate": "pass", "artifact": "shape.html"},
         {"skill": "lodestar-shape-lock", "phase": "ux-approval", "gate": "pass"},
         {"skill": "lodestar-lock", "phase": "product-lock", "gate": "pass"},
         {"skill": "lodestar-checklist", "phase": "spec-gate", "gate": "pass"},
@@ -336,13 +366,45 @@ def run_dry_run(out_dir: Path) -> dict[str, Any]:
     write_text(out_dir / "survey.md", "# Office Hours\n\nDry-run office hours completed.\n")
     write_text(out_dir / "scout-notes.md", "# Brainstorm Notes\n\nDry-run options explored.\n")
     write_text(out_dir / "manifest.md", "# Intent Brief\n\nDry-run intent brief completed.\n")
-    write_json(out_dir / "call.json", {"id": "DC1", "recommended": "Approve UX preview", "requires_user": True})
-    write_text(out_dir / "palette.md", "# Design System Lite\n\nCompact, operational, evidence-first.\n")
+    write_json(out_dir / "call.json", {"id": "DC1", "recommended": "Approve wireframe, DESIGN.md, then final UI/UX preview", "requires_user": True})
+    write_text(out_dir / "wireframe.html", ux_preview_html.replace("Lodestar Shape", "Lodestar Wireframe"))
+    write_text(
+        out_dir / "DESIGN.md",
+        "# DESIGN.md\n\n"
+        "## Product Archetype\n\nOperational SaaS web app.\n\n"
+        "## Benchmark Bar\n\n"
+        "- Linear: compact work-surface density and restrained navigation.\n"
+        "- Stripe Dashboard: financial hierarchy, table clarity, and semantic status.\n\n"
+        "## Visual Theme\n\nCompact, operational, evidence-first.\n\n"
+        "## Color Palette\n\nUse semantic roles for surface, ink, accent, warning, danger, and success.\n\n"
+        "## Typography\n\nUse a compact system UI hierarchy with readable table text.\n\n"
+        "## Component Inventory\n\nNavigation, KPI cards, data table, detail pane, primary actions, empty/loading/error states.\n\n"
+        "## Layout Principles\n\nFirst screen must reveal status, priority, and next action without scrolling.\n\n"
+        "## Data Realism\n\nUse domain-specific sample data, varied statuses, realistic metrics, and no placeholder copy.\n\n"
+        "## Release-Quality Acceptance Criteria\n\n"
+        "- First-screen decision speed: pass within 3 seconds.\n"
+        "- Benchmark fit: match the named references' density and hierarchy.\n"
+        "- Component fidelity: controls, tables, states, and spacing must look production-ready.\n"
+        "- Visual craft: no overlap, clipping, awkward wrapping, or random decoration.\n"
+        "- No MVP tells: no wireframe labels, placeholder text, or generic hero slogans.\n\n"
+        "## Visual QA Checklist\n\nCapture mobile, tablet, and desktop screenshots; inspect failures; record fixes; and require result: pass.\n\n"
+        "## Do's\n\nPreserve approved structure and make the next action obvious.\n\n"
+        "## Don'ts\n\nDo not ship generic card dashboards, placeholder data, or MVP-looking previews.\n\n"
+        "## Responsive Behavior\n\n"
+        "Mobile, tablet, and desktop must pass as a viewport matrix. Support 320 CSS px reflow. Use component adaptation and container-level rules before page-level breakpoints.\n\n"
+        "## Agent Prompt Guide\n\nUse this design system as the source of truth.\n\nApproved by: dry-run\n",
+    )
+    write_text(out_dir / "design-preview.html", "<!doctype html><title>Design Preview</title><h1>Design Preview</h1>")
+    write_text(out_dir / "palette.md", "# Design System Compatibility Summary\n\nSource of truth: DESIGN.md\n\nApproved by: dry-run\n")
     write_text(out_dir / "shape.html", ux_preview_html)
-    write_text(out_dir / "shape-lock.md", "# UX Lock\n\nApproved preview: shape.html\n")
+    write_text(
+        out_dir / "visual-qa.md",
+        "# Visual QA\n\nScreenshots: mobile, tablet, desktop dry-run evidence.\n\nFailures: none after dry-run inspection.\n\nFixes: none required.\n\nMobile: pass.\nTablet: pass.\nDesktop: pass.\n\nResult: pass\n",
+    )
+    write_text(out_dir / "shape-lock.md", "# UX Lock\n\nApproved wireframe: wireframe.html\nApproved design system: DESIGN.md\nApproved design preview: design-preview.html\nApproved final UI/UX preview: shape.html\nApproved visual QA: visual-qa.md\n")
     spec_gate_report = build_spec_gate_report(
         spec,
-        "# UX Lock\n\nApproved preview: shape.html\n\nApproved by: dry-run\n",
+        "# UX Lock\n\nApproved wireframe: wireframe.html\nApproved design system: DESIGN.md\nApproved design preview: design-preview.html\nApproved final UI/UX preview: shape.html\nApproved visual QA: visual-qa.md\n\nApproved by: dry-run\n",
         [{"status": "accepted", "decision": "approved", "source": "dry-run"}],
     )
     fail_if_errors(validate_spec_gate_report_obj(spec_gate_report))
@@ -415,7 +477,7 @@ def run_dry_run(out_dir: Path) -> dict[str, Any]:
         execution_plan,
         build_evidence,
         approved_review,
-        "# UX Lock\n\nApproved preview: shape.html\n\nApproved by: dry-run\n",
+        "# UX Lock\n\nApproved wireframe: wireframe.html\nApproved design system: DESIGN.md\nApproved design preview: design-preview.html\nApproved final UI/UX preview: shape.html\nApproved visual QA: visual-qa.md\n\nApproved by: dry-run\n",
         proof_bundle,
         browser_evidence,
         {
@@ -447,7 +509,10 @@ def run_dry_run(out_dir: Path) -> dict[str, Any]:
     write_json(out_dir / "build-evidence.json", build_evidence)
     write_json(out_dir / "review-rejected-report.json", rejected_review)
     write_json(out_dir / "review-report.json", approved_review)
+    write_json(out_dir / "browser-evidence-mobile.json", mobile_browser_evidence)
+    write_json(out_dir / "browser-evidence-tablet.json", tablet_browser_evidence)
     write_json(out_dir / "browser-evidence.json", browser_evidence)
+    write_json(out_dir / "responsive-matrix.json", responsive_matrix)
     write_json(out_dir / "quality-report.json", quality_report)
     write_json(out_dir / "debrief.json", debrief)
     write_text(out_dir / "debrief-brief.md", render_debrief_brief(debrief))
@@ -494,8 +559,12 @@ def run_dry_run(out_dir: Path) -> dict[str, Any]:
         "artifacts": [
             "survey.md",
             "call.json",
+            "wireframe.html",
+            "DESIGN.md",
+            "design-preview.html",
             "palette.md",
             "shape.html",
+            "visual-qa.md",
             "shape-lock.md",
             "checklist-report.json",
             "task-graph.json",
@@ -506,7 +575,10 @@ def run_dry_run(out_dir: Path) -> dict[str, Any]:
             "build-evidence.json",
             "review-rejected-report.json",
             "review-report.json",
+            "browser-evidence-mobile.json",
+            "browser-evidence-tablet.json",
             "browser-evidence.json",
+            "responsive-matrix.json",
             "quality-report.json",
             "debrief.json",
             "amendment-request.json",

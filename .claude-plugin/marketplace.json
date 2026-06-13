@@ -5,14 +5,14 @@
     "url": "https://github.com/builder-seoro"
   },
   "metadata": {
-    "description": "Lodestar marketplace: completeness-first AI development delegation harness.",
+    "description": "Lodestar helps users turn rough ideas into clear product direction, approved previews, and finished AI-built products.",
     "version": "0.1.0"
   },
   "plugins": [
     {
       "name": "lodestar",
       "source": "./",
-      "description": "Completeness-first, UX-first AI development delegation harness. Approve product shape before agents write code. 20 gated skills + a deterministic Python safety engine, built on Spec Kit, Superpowers, Compound Engineering, and gstack contracts.",
+      "description": "Shape a rough idea, approve the product preview, then let AI agents build, test, review, and hand back the product with proof.",
       "version": "0.1.0",
       "category": "productivity",
       "license": "MIT",
