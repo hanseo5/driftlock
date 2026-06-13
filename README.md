@@ -134,30 +134,38 @@ A single orchestrator (`lodestar-mission-control`) drives 20 first-class worker 
 
 ## Under the hood: the safety engine
 
-The Markdown skills define the agent workflow. [`scripts/lodestar.py`](scripts/lodestar.py)
-(~4,800 lines, 24 subcommands) is the deterministic layer that makes the gates
-real — it validates every artifact against a JSON [schema](schemas/), checks
-task coverage, enforces runner transitions and role safety, and refuses invalid
-handoffs.
+The Markdown skills define the agent workflow. The [`lodestar`](src/lodestar)
+Python package — **pure standard library, zero third-party dependencies** — is
+the deterministic layer that makes the gates real: it validates every artifact
+against a JSON [schema](schemas/), checks task coverage, enforces runner
+transitions and role safety, and refuses invalid handoffs.
 
-Verify the engine end to end with a deterministic dry run (no API calls):
+Install the engine CLI (zero deps, so this is instant):
 
 ```bash
-# macOS / Linux
-python -m pip install -r requirements-dev.txt
-python ./scripts/lodestar.py dry-run --out ./.lodestar/dry-run
+# one-off run, nothing installed (needs uv)
+uvx --from git+https://github.com/hanseo5/lodestar.git lodestar --help
+
+# or install the `lodestar` command for good
+uv tool install git+https://github.com/hanseo5/lodestar.git
+
+# or with pip, from a checkout
+pip install -e .
 ```
 
-```powershell
-# Windows PowerShell
-$py = "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe"
-& $py .\scripts\lodestar.py dry-run --out .\.lodestar\dry-run
+Then verify the whole pipeline with a deterministic dry run (no API calls), run
+from a repo checkout:
+
+```bash
+lodestar dry-run --out ./.lodestar/dry-run            # installed command
+python -m lodestar dry-run --out ./.lodestar/dry-run  # or as a module
+python ./scripts/lodestar.py dry-run --out ./.lodestar/dry-run  # or straight from source
 ```
 
 The dry run walks the full pipeline and emits every artifact in the contract
 below. See [`references/completeness-first-architecture.md`](references/completeness-first-architecture.md)
-for the non-negotiable gates, and the README history / `--help` for the full
-command surface (`validate`, `spec-gate`, `quality-gate`, `execution-dispatch-batch`,
+for the non-negotiable gates, and `lodestar --help` for the full command surface
+(`validate`, `spec-gate`, `quality-gate`, `execution-dispatch-batch`,
 `ce-synthesize`, and more).
 
 <details>
